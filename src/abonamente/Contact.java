@@ -1,4 +1,4 @@
-package Abonament;
+package abonamente;
 
 import java.io.Serializable;
 
@@ -35,7 +35,8 @@ public class Contact implements Comparable, Serializable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-    
-    
+    @Override
+    public String toString() {
+        return this.getAbonat().getNume() + " " + this.getAbonat().getPrenume()+ " " + this.getAbonat().getCnp(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

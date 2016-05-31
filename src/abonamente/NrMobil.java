@@ -1,8 +1,14 @@
-package Abonament;
+package abonamente;
 
-public class NrMobil implements NrTel{
+import java.io.Serializable;
+
+public class NrMobil implements NrTel, Serializable{
     
     String nrTel;
+
+    public NrMobil(String nrTel) {
+        this.nrTel = nrTel;
+    }
     
     @Override
     public void setNr(String nrTel) {
@@ -14,7 +20,7 @@ public class NrMobil implements NrTel{
 
     @Override
     public String getNr() {
-        nrTel="Neimplementat";
+        nrTel=this.nrTel;
         return nrTel;
     }
     

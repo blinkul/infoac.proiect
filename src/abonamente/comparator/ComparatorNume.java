@@ -1,6 +1,6 @@
-package Abonament.Comparator;
+package abonamente.comparator;
 
-import Abonament.Contact;
+import abonamente.Contact;
 import java.util.Comparator;
 
 public class ComparatorNume implements Comparator<Contact>{

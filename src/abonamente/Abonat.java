@@ -1,6 +1,8 @@
-package Abonament;
+package abonamente;
 
-public class Abonat {
+import java.io.Serializable;
+
+public class Abonat implements Serializable{
     String cnp;
     String nume, prenume;
 
