@@ -222,11 +222,13 @@ public class AgendaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSortActionPerformed
-
+            //am creat metoda addListeners()
+            //nu am stiut cum sa mai sterg aceasta metoda
     }//GEN-LAST:event_buttonSortActionPerformed
 
     private void jCreateContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateContactActionPerformed
-        // TODO add your handling code here:
+            //am creat metoda addListeners()
+            //nu am stiut cum sa mai sterg aceasta metoda
     }//GEN-LAST:event_jCreateContactActionPerformed
 
     /**
