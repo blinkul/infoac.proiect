@@ -21,9 +21,9 @@ public class TestController {
 //    public static void main(String[] args) throws IOException, ClassNotFoundException {
 //        Abonat  ciprian= new Abonat("2234", "Anghel", "Ciprian");
 //        NrTel nrTel = new NrMobil("0726 328 982");
-//        Abonat catalin = new Abonat("1223", "Cimpoeru", "Catalin");
+//        Abonat john = new Abonat("1223", "John", "Smith");
 //        NrTel nrTel2 = new NrMobil("21313123");
-//        Contact contact = new Contact(catalin, nrTel);
+//        Contact contact = new Contact(john, nrTel);
 //        Contact contact2 = new Contact(ciprian, nrTel2);
 //        List<Contact> contacts = new ArrayList<>();
 //        contacts.add(contact);
