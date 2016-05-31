@@ -112,6 +112,8 @@ public class AgendaFrame extends javax.swing.JFrame {
         tabelContacte = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Proiect - Anghel Ciprian Liviu");
+        setResizable(false);
 
         buttonSort.setText("Sort");
         buttonSort.addActionListener(new java.awt.event.ActionListener() {
