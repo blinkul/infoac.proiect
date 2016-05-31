@@ -93,8 +93,11 @@ public class AgendaFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        panelMare = new javax.swing.JPanel();
+        paneCenter = new javax.swing.JPanel();
         buttonSort = new javax.swing.JButton();
         radioSortareDupaNume = new javax.swing.JRadioButton();
         radioSortareDupaPrenume = new javax.swing.JRadioButton();
@@ -108,14 +111,32 @@ public class AgendaFrame extends javax.swing.JFrame {
         tfCNP = new javax.swing.JLabel();
         nrTelTextField = new javax.swing.JLabel();
         jCreateContact = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane = new javax.swing.JScrollPane();
         tabelContacte = new javax.swing.JTable();
+        paneWest = new javax.swing.JPanel();
+        labelReclamaWest = new javax.swing.JLabel();
+        paneEast = new javax.swing.JPanel();
+        labelReclamaEast = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Proiect - Anghel Ciprian Liviu");
+        setMinimumSize(new java.awt.Dimension(1000, 400));
+        setPreferredSize(new java.awt.Dimension(800, 400));
         setResizable(false);
 
+        panelMare.setMaximumSize(null);
+        panelMare.setRequestFocusEnabled(false);
+        panelMare.setLayout(new java.awt.BorderLayout());
+
+        paneCenter.setForeground(new java.awt.Color(255, 204, 0));
+        paneCenter.setAlignmentX(0.0F);
+        paneCenter.setAlignmentY(0.0F);
+        paneCenter.setMinimumSize(new java.awt.Dimension(600, 400));
+        paneCenter.setName(""); // NOI18N
+
         buttonSort.setText("Sort");
+        buttonSort.setMaximumSize(null);
+        buttonSort.setMinimumSize(null);
+        buttonSort.setPreferredSize(new java.awt.Dimension(10, 23));
         buttonSort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSortActionPerformed(evt);
@@ -127,6 +148,9 @@ public class AgendaFrame extends javax.swing.JFrame {
         radioSortareDupaPrenume.setText("Sortare dupa prenume");
 
         radioSortareDupaCNP.setText("Sortare dupa CNP");
+
+        numeTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        numeTextField.setAutoscrolls(false);
 
         tfNume.setText("Nume");
 
@@ -143,6 +167,10 @@ public class AgendaFrame extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane.setMinimumSize(new java.awt.Dimension(200, 400));
+        jScrollPane.setName(""); // NOI18N
+        jScrollPane.setPreferredSize(new java.awt.Dimension(400, 402));
+
         tabelContacte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -154,84 +182,154 @@ public class AgendaFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tabelContacte);
+        tabelContacte.setAlignmentX(0.0F);
+        tabelContacte.setAlignmentY(0.0F);
+        jScrollPane.setViewportView(tabelContacte);
+
+        javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
+        paneCenter.setLayout(paneCenterLayout);
+        paneCenterLayout.setHorizontalGroup(
+            paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneCenterLayout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radioSortareDupaPrenume)
+                    .addComponent(radioSortareDupaNume)
+                    .addGroup(paneCenterLayout.createSequentialGroup()
+                        .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfNumarTel)
+                            .addComponent(cnpTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(prenumeTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nrTelTextField)
+                            .addComponent(tfPrenume)
+                            .addComponent(tfNume)
+                            .addComponent(tfCNP)))
+                    .addComponent(radioSortareDupaCNP)
+                    .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(buttonSort, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCreateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
+        );
+        paneCenterLayout.setVerticalGroup(
+            paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneCenterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNume))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfPrenume))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cnpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCNP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfNumarTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nrTelTextField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCreateContact)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radioSortareDupaNume)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioSortareDupaPrenume)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radioSortareDupaCNP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
+            .addGroup(paneCenterLayout.createSequentialGroup()
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelMare.add(paneCenter, java.awt.BorderLayout.CENTER);
+
+        paneWest.setToolTipText("");
+        paneWest.setAlignmentX(0.0F);
+        paneWest.setAlignmentY(0.0F);
+        paneWest.setMinimumSize(new java.awt.Dimension(100, 400));
+        paneWest.setName(""); // NOI18N
+        paneWest.setPreferredSize(new java.awt.Dimension(100, 400));
+
+        labelReclamaWest.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelReclamaWest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/reclama1.jpg"))); // NOI18N
+        labelReclamaWest.setAlignmentY(0.0F);
+        labelReclamaWest.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        javax.swing.GroupLayout paneWestLayout = new javax.swing.GroupLayout(paneWest);
+        paneWest.setLayout(paneWestLayout);
+        paneWestLayout.setHorizontalGroup(
+            paneWestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelReclamaWest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        paneWestLayout.setVerticalGroup(
+            paneWestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneWestLayout.createSequentialGroup()
+                .addComponent(labelReclamaWest)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelMare.add(paneWest, java.awt.BorderLayout.WEST);
+
+        paneEast.setAlignmentX(0.0F);
+        paneEast.setAlignmentY(0.0F);
+        paneEast.setMinimumSize(new java.awt.Dimension(100, 400));
+        paneEast.setPreferredSize(new java.awt.Dimension(100, 400));
+
+        labelReclamaEast.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelReclamaEast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/reclama2.jpg"))); // NOI18N
+        labelReclamaEast.setAlignmentY(0.0F);
+
+        javax.swing.GroupLayout paneEastLayout = new javax.swing.GroupLayout(paneEast);
+        paneEast.setLayout(paneEastLayout);
+        paneEastLayout.setHorizontalGroup(
+            paneEastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneEastLayout.createSequentialGroup()
+                .addComponent(labelReclamaEast)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        paneEastLayout.setVerticalGroup(
+            paneEastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneEastLayout.createSequentialGroup()
+                .addComponent(labelReclamaEast)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelMare.add(paneEast, java.awt.BorderLayout.EAST);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radioSortareDupaCNP)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(numeTextField)
-                            .addComponent(buttonSort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(prenumeTextField)
-                            .addComponent(cnpTextField)
-                            .addComponent(tfNumarTel)
-                            .addComponent(jCreateContact, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nrTelTextField)
-                            .addComponent(tfCNP)
-                            .addComponent(tfPrenume)
-                            .addComponent(tfNume)))
-                    .addComponent(radioSortareDupaPrenume)
-                    .addComponent(radioSortareDupaNume))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0)
+                .addComponent(panelMare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNume))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPrenume))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cnpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfCNP))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfNumarTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nrTelTextField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCreateContact)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(radioSortareDupaNume)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radioSortareDupaPrenume)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radioSortareDupaCNP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSort)
-                        .addGap(5, 5, 5))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelMare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSortActionPerformed
-            //am creat metoda addListeners()
-            //nu am stiut cum sa mai sterg aceasta metoda
-    }//GEN-LAST:event_buttonSortActionPerformed
-
     private void jCreateContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateContactActionPerformed
-            //am creat metoda addListeners()
-            //nu am stiut cum sa mai sterg aceasta metoda
+        //am creat metoda addListeners()
+        //nu am stiut cum sa mai sterg aceasta metoda
     }//GEN-LAST:event_jCreateContactActionPerformed
+
+    private void buttonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSortActionPerformed
+        //am creat metoda addListeners()
+        //nu am stiut cum sa mai sterg aceasta metoda
+    }//GEN-LAST:event_buttonSortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,9 +371,15 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonSort;
     private javax.swing.JTextField cnpTextField;
     private javax.swing.JButton jCreateContact;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JLabel labelReclamaEast;
+    private javax.swing.JLabel labelReclamaWest;
     private javax.swing.JLabel nrTelTextField;
     private javax.swing.JTextField numeTextField;
+    private javax.swing.JPanel paneCenter;
+    private javax.swing.JPanel paneEast;
+    private javax.swing.JPanel paneWest;
+    private javax.swing.JPanel panelMare;
     private javax.swing.JTextField prenumeTextField;
     private javax.swing.JRadioButton radioSortareDupaCNP;
     private javax.swing.JRadioButton radioSortareDupaNume;
