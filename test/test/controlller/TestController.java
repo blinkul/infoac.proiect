@@ -4,7 +4,7 @@ package test.controlller;
 import abonamente.Abonat;
 import abonamente.comparator.ComparatorNume;
 import abonamente.Contact;
-import abonamente.NrMobil;
+import abonamente.NrTel;
 import abonamente.NrTel;
 import abonamente.controller.ContactController;
 import java.io.File;
@@ -20,9 +20,9 @@ public class TestController {
     
 //    public static void main(String[] args) throws IOException, ClassNotFoundException {
 //        Abonat  ciprian= new Abonat("2234", "Anghel", "Ciprian");
-//        NrTel nrTel = new NrMobil("0726 328 982");
+//        NrTel nrTel = new NrTel("0726 328 982");
 //        Abonat john = new Abonat("1223", "John", "Smith");
-//        NrTel nrTel2 = new NrMobil("21313123");
+//        NrTel nrTel2 = new NrTel("21313123");
 //        Contact contact = new Contact(john, nrTel);
 //        Contact contact2 = new Contact(ciprian, nrTel2);
 //        List<Contact> contacts = new ArrayList<>();

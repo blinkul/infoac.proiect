@@ -71,7 +71,8 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Agenda Telefonica"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1000, 400]"/>
     </Property>
@@ -148,8 +149,8 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="nrTextField" max="32767" attributes="0"/>
                                   <Component id="cnpTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="prenumeTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="numeTextField" alignment="0" pref="150" max="32767" attributes="0"/>
+                                  <Component id="numeTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="prenumeTextField" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -175,12 +176,12 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="prenumeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="numeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfNume" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="numeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="prenumeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfPrenume" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>

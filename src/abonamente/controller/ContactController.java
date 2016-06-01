@@ -2,7 +2,7 @@
 package abonamente.controller;
 import abonamente.Abonat;
 import abonamente.Contact;
-import abonamente.NrMobil;
+import abonamente.NrTel;
 import abonamente.NrTel;
 import abonamente.gui.AgendaFrame;
 import java.io.BufferedOutputStream;
@@ -30,7 +30,6 @@ public class ContactController {
 
     private ContactController() {
     }
-    
     public void saveContact(List<Contact> contact, File file) throws IOException{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file)); //File chooser
         oos.writeObject(contact);
@@ -41,21 +40,17 @@ public class ContactController {
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
-    
     public Contact createContact(String nume, String prenume, String cnp, String nrTel){
         Abonat abonat = new Abonat(cnp, nume, prenume);
-        NrTel nr = new NrMobil(nrTel);
+        NrTel nr = new NrTel(nrTel);
         Contact contact = new Contact(abonat, nr);
         return contact;
     }
-    
     //polimorfism sortare
     public List<Contact> sortare(List<Contact> contacte, Comparator<Contact> comparator){
         Collections.sort(contacte, comparator);
         return contacte;
     }
-    
-
     public void fileSaver(List<Contact> contact) throws IOException{
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File("."));
@@ -64,7 +59,6 @@ public class ContactController {
         fc.showSaveDialog(null);
         saveContact(contact, fc.getSelectedFile());
     }
-    
     public File fileOpener(){
         ContactController openFileChooser = ContactController.getInstance();
         JFileChooser fc = new JFileChooser();
@@ -74,8 +68,6 @@ public class ContactController {
         fc.showOpenDialog(null);
         return fc.getSelectedFile();
     }
-
-    
     public static ContactController getInstance(){
         if(instance == null)
             instance = new ContactController();

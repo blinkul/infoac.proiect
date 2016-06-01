@@ -5,6 +5,7 @@ import abonamente.comparator.ComparatorNume;
 import abonamente.comparator.ComparatorPrenume;
 import abonamente.Contact;
 import abonamente.controller.ContactController;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -140,6 +142,16 @@ public class AgendaFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new JPanel(), "Aceasta aplicatie a fost creata de Anghel Ciprian Liviu ca proiect pentru cursul de Java din cadrul InfoAcademy.");
             }
         });
+        menuItemExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = JOptionPane.showConfirmDialog(new JPanel(),"Doriti sa inchideti aplicatia?","Confirmare",JOptionPane.YES_NO_OPTION);
+                if(i==JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }else{return;}
+                
+            }
+        });
     }
 
     public void adaugaContact() {
@@ -199,7 +211,8 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuItemAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agenda Telefonica");
         setMinimumSize(new java.awt.Dimension(1000, 400));
         setResizable(false);
 
@@ -278,8 +291,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                         .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(nrTextField)
                             .addComponent(cnpTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(prenumeTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addComponent(numeTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nrTelTextField)
@@ -298,11 +311,11 @@ public class AgendaFrame extends javax.swing.JFrame {
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNume))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfPrenume))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
