@@ -4,6 +4,7 @@ import abonamente.Abonat;
 import abonamente.Contact;
 import abonamente.NrMobil;
 import abonamente.NrTel;
+import abonamente.gui.AgendaFrame;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,35 +55,16 @@ public class ContactController {
         return contacte;
     }
     
- 
-    
-    //Am creat aceasta metoda pentru a o folosi pentru optinule de OPEN si SAVE din clasa AgendaFrame
-    public void fileChooser(){
+
+    public void fileSaver(List<Contact> contact) throws IOException{
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("./build/classes/abonamente/saves")); //Deschide fisierul in folderul saves
-        fc.setDialogTitle("Deschide Fisier");
+        fc.setCurrentDirectory(new File("./build/classes/abonamente/saves"));
+        fc.setDialogTitle("Salveaza Fisier");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        fc.showOpenDialog(null);  
+        fc.showSaveDialog(null);
+        saveContact(contact, fc.getSelectedFile());
     }
-    
-    public void fileSaver(){
-        
-    }
-    
-    //SERIALIZARE
-    public void serializareContact(File fileOutput){
-        try {
-            FileOutputStream fileOut = new FileOutputStream("./build/classes/abonamente/saves/"+fileOutput);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(out);
-            out.close();
-            fileOut.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ContactController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ContactController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
     
     public static ContactController getInstance(){
         if(instance == null)

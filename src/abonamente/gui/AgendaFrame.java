@@ -93,15 +93,32 @@ public class AgendaFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ContactController openFileChooser = ContactController.getInstance();
-                openFileChooser.fileChooser();          
-                //folosesc fc.getSelectedFile()    
+                JFileChooser fc = new JFileChooser();
+                fc.setCurrentDirectory(new File("./build/classes/abonamente/saves"));
+                fc.setDialogTitle("Deschide Fisier");
+                fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                fc.showOpenDialog(null);
+                try {
+                    contacte = openFileChooser.openContact(fc.getSelectedFile());
+                } catch (IOException ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                afisareContacte();
                     
             }
         });
         menuItemSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                ContactController saveFileChooser = ContactController.getInstance();
+                try {
+                    saveFileChooser.fileSaver(contacte);
+                } catch (IOException ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
             }
         });
         
