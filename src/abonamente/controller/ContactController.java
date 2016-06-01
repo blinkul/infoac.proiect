@@ -58,7 +58,7 @@ public class ContactController {
 
     public void fileSaver(List<Contact> contact) throws IOException{
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("./build/classes/abonamente/saves"));
+        fc.setCurrentDirectory(new File("."));
         fc.setDialogTitle("Salveaza Fisier");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fc.showSaveDialog(null);
@@ -68,7 +68,7 @@ public class ContactController {
     public File fileOpener(){
         ContactController openFileChooser = ContactController.getInstance();
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("./build/classes/abonamente/saves"));
+        fc.setCurrentDirectory(new File("."));
         fc.setDialogTitle("Deschide Fisier");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fc.showOpenDialog(null);
