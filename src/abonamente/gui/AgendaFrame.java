@@ -5,11 +5,22 @@ import abonamente.comparator.ComparatorNume;
 import abonamente.comparator.ComparatorPrenume;
 import abonamente.Contact;
 import abonamente.controller.ContactController;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +43,10 @@ public class AgendaFrame extends javax.swing.JFrame {
         tabelContacte.setModel(dtm);
         afisareContacte();
         addListeners();
+        //*******************************************************************************
+        menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
+        menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
+        //*******************************************************************************
     }
 
     private void afisareContacte() {
@@ -73,6 +88,47 @@ public class AgendaFrame extends javax.swing.JFrame {
                 }
             }
         });
+        
+        menuItemOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ContactController openFileChooser = ContactController.getInstance();
+                openFileChooser.fileChooser();          
+                //folosesc fc.getSelectedFile()    
+                    
+            }
+        });
+        menuItemSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        
+        /**
+         * Dupa validarea codului de inregistrare optiunile Open si Save devin active iar optiunea de Inregistrare devine inactiva.
+         * Codul de validare = cisco
+         */
+        menuItemInregistrare.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String input = JOptionPane.showInputDialog(new JPanel() ,"Introduceti codul de validare!");
+                if(input.equals("cisco")){
+                   menuItemSave.setEnabled(true);
+                   menuItemOpen.setEnabled(true);
+                   menuItemInregistrare.setEnabled(false);
+                   JOptionPane.showMessageDialog(new JPanel(), "Codul a fost validat cu succes. Acum beneficiati de optiunile Open si Save");
+                }else{
+                   JOptionPane.showMessageDialog(new JPanel(),"Codul introdus nu este corect.\nAsigurati-va ca nu aveti CapsLock activ.", "Codul este incorect!", JOptionPane.WARNING_MESSAGE);
+                }                              
+            }
+        });
+        menuItemAbout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(new JPanel(), "Aceasta aplicatie a fost creata de Anghel Ciprian Liviu ca proiect pentru cursul de Java din cadrul InfoAcademy.");
+            }
+        });
     }
 
     public void adaugaContact() {
@@ -93,7 +149,6 @@ public class AgendaFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         panelMare = new javax.swing.JPanel();
@@ -117,13 +172,21 @@ public class AgendaFrame extends javax.swing.JFrame {
         labelReclamaWest = new javax.swing.JLabel();
         paneEast = new javax.swing.JPanel();
         labelReclamaEast = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuFile = new javax.swing.JMenu();
+        menuItemOpen = new javax.swing.JMenuItem();
+        menuItemSave = new javax.swing.JMenuItem();
+        menuItemSeparator = new javax.swing.JPopupMenu.Separator();
+        menuItemExit = new javax.swing.JMenuItem();
+        menuHelp = new javax.swing.JMenu();
+        menuItemInregistrare = new javax.swing.JMenuItem();
+        menuItemSeparator2 = new javax.swing.JPopupMenu.Separator();
+        menuItemAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 400));
-        setPreferredSize(new java.awt.Dimension(800, 400));
         setResizable(false);
 
-        panelMare.setMaximumSize(null);
         panelMare.setRequestFocusEnabled(false);
         panelMare.setLayout(new java.awt.BorderLayout());
 
@@ -304,6 +367,45 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         panelMare.add(paneEast, java.awt.BorderLayout.EAST);
 
+        menuFile.setText("File");
+
+        menuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemOpen.setText("Open");
+        menuItemOpen.setToolTipText("");
+        menuItemOpen.setEnabled(false);
+        menuFile.add(menuItemOpen);
+
+        menuItemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemSave.setText("Save");
+        menuItemSave.setEnabled(false);
+        menuFile.add(menuItemSave);
+        menuFile.add(menuItemSeparator);
+
+        menuItemExit.setText("Exit");
+        menuFile.add(menuItemExit);
+
+        jMenuBar1.add(menuFile);
+
+        menuHelp.setText("Help");
+
+        menuItemInregistrare.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemInregistrare.setText("Inregistrare");
+        menuItemInregistrare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemInregistrareActionPerformed(evt);
+            }
+        });
+        menuHelp.add(menuItemInregistrare);
+        menuHelp.add(menuItemSeparator2);
+
+        menuItemAbout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemAbout.setText("About");
+        menuHelp.add(menuItemAbout);
+
+        jMenuBar1.add(menuHelp);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -330,6 +432,11 @@ public class AgendaFrame extends javax.swing.JFrame {
         //am creat metoda addListeners()
         //nu am stiut cum sa mai sterg aceasta metoda
     }//GEN-LAST:event_buttonSortActionPerformed
+
+    private void menuItemInregistrareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInregistrareActionPerformed
+        //am creat metoda addListeners()
+        //nu am stiut cum sa mai sterg aceasta metoda
+    }//GEN-LAST:event_menuItemInregistrareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,9 +478,19 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonSort;
     private javax.swing.JTextField cnpTextField;
     private javax.swing.JButton jCreateContact;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JLabel labelReclamaEast;
     private javax.swing.JLabel labelReclamaWest;
+    private javax.swing.JMenu menuFile;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenuItem menuItemAbout;
+    private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemInregistrare;
+    private javax.swing.JMenuItem menuItemOpen;
+    private javax.swing.JMenuItem menuItemSave;
+    private javax.swing.JPopupMenu.Separator menuItemSeparator;
+    private javax.swing.JPopupMenu.Separator menuItemSeparator2;
     private javax.swing.JLabel nrTelTextField;
     private javax.swing.JTextField numeTextField;
     private javax.swing.JPanel paneCenter;
