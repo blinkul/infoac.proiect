@@ -146,7 +146,7 @@
                           <Component id="radioSortareDupaNume" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="tfNumarTel" max="32767" attributes="0"/>
+                                  <Component id="nrTextField" max="32767" attributes="0"/>
                                   <Component id="cnpTextField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="prenumeTextField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="numeTextField" alignment="0" pref="150" max="32767" attributes="0"/>
@@ -190,7 +190,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfNumarTel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nrTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="nrTelTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -255,7 +255,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="cnpTextField">
             </Component>
-            <Component class="javax.swing.JTextField" name="tfNumarTel">
+            <Component class="javax.swing.JTextField" name="nrTextField">
             </Component>
             <Component class="javax.swing.JLabel" name="tfNume">
               <Properties>

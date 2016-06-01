@@ -35,9 +35,9 @@ public class ContactController {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file)); //File chooser
         oos.writeObject(contact);
     }
-    public List<Contact> openContact(File file) throws IOException, ClassNotFoundException{
+    public List<Contact> openContact() throws IOException, ClassNotFoundException{
         List<Contact> contact =  new ArrayList<>();
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileOpener()));
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
@@ -63,6 +63,16 @@ public class ContactController {
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fc.showSaveDialog(null);
         saveContact(contact, fc.getSelectedFile());
+    }
+    
+    public File fileOpener(){
+        ContactController openFileChooser = ContactController.getInstance();
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File("./build/classes/abonamente/saves"));
+        fc.setDialogTitle("Deschide Fisier");
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.showOpenDialog(null);
+        return fc.getSelectedFile();
     }
 
     

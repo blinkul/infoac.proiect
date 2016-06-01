@@ -93,20 +93,14 @@ public class AgendaFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ContactController openFileChooser = ContactController.getInstance();
-                JFileChooser fc = new JFileChooser();
-                fc.setCurrentDirectory(new File("./build/classes/abonamente/saves"));
-                fc.setDialogTitle("Deschide Fisier");
-                fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-                fc.showOpenDialog(null);
                 try {
-                    contacte = openFileChooser.openContact(fc.getSelectedFile());
+                    contacte = openFileChooser.openContact();
                 } catch (IOException ex) {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                afisareContacte();
-                    
+                afisareContacte();                    
             }
         });
         menuItemSave.addActionListener(new ActionListener() {
@@ -152,10 +146,15 @@ public class AgendaFrame extends javax.swing.JFrame {
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
-        String numar = tfNumarTel.getText();
+        String numar = nrTextField.getText();
         Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
         contacte.add(contact);
         afisareContacte();
+        numeTextField.setText("");
+        prenumeTextField.setText("");
+        cnpTextField.setText("");
+        nrTextField.setText("");
+        
     }
 
     /**
@@ -177,7 +176,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         numeTextField = new javax.swing.JTextField();
         prenumeTextField = new javax.swing.JTextField();
         cnpTextField = new javax.swing.JTextField();
-        tfNumarTel = new javax.swing.JTextField();
+        nrTextField = new javax.swing.JTextField();
         tfNume = new javax.swing.JLabel();
         tfPrenume = new javax.swing.JLabel();
         tfCNP = new javax.swing.JLabel();
@@ -277,7 +276,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addComponent(radioSortareDupaNume)
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfNumarTel)
+                            .addComponent(nrTextField)
                             .addComponent(cnpTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(prenumeTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(numeTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
@@ -311,7 +310,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addComponent(tfCNP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNumarTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nrTelTextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCreateContact)
@@ -509,6 +508,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator menuItemSeparator;
     private javax.swing.JPopupMenu.Separator menuItemSeparator2;
     private javax.swing.JLabel nrTelTextField;
+    private javax.swing.JTextField nrTextField;
     private javax.swing.JTextField numeTextField;
     private javax.swing.JPanel paneCenter;
     private javax.swing.JPanel paneEast;
@@ -520,7 +520,6 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioSortareDupaPrenume;
     private javax.swing.JTable tabelContacte;
     private javax.swing.JLabel tfCNP;
-    private javax.swing.JTextField tfNumarTel;
     private javax.swing.JLabel tfNume;
     private javax.swing.JLabel tfPrenume;
     // End of variables declaration//GEN-END:variables
