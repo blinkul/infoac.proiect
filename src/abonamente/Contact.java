@@ -3,12 +3,16 @@ package abonamente;
 import java.io.Serializable;
 
 public class Contact implements Comparable, Serializable{
-    Abonat abonat;
-    NrTel nrTel;
+    private Abonat abonat;
+    private NrTel nrTel;
+    private static int id;
+    private String idString;
 
     public Contact(Abonat abonat, NrTel nrTel) {
         this.abonat = abonat;
         this.nrTel = nrTel;
+        id++;
+        setID();
     }
 
     public Contact() {
@@ -28,6 +32,14 @@ public class Contact implements Comparable, Serializable{
 
     public void setNrTel(NrTel nrTel) {
         this.nrTel = nrTel;
+    }
+    
+    //Preia ID ul static (int) incrementat in constructorul obiectului si il transforma in string (idString) pentru a fi folosit in JTable.
+    private void setID(){
+        idString = String.valueOf(id);
+    }
+    public String getID(){
+        return idString;
     }
 
     @Override

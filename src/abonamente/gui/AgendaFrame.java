@@ -42,7 +42,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         buttonGroup1.add(radioSortareDupaCNP);
         contacte = new ArrayList<>();
         dtm = new DefaultTableModel();
-        dtm.setColumnIdentifiers(new String[]{"Nume", "Prenume", "CNP", "Numar de telefon"});
+        dtm.setColumnIdentifiers(new String[]{"ID","Nume", "Prenume", "CNP", "Numar de telefon"});
         tabelContacte.setModel(dtm);
         afisareContacte();
         addListeners();
@@ -61,6 +61,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         for (Contact contact : contacte) {
             dtm.addRow(new String[]{
+                contact.getID(),
                 contact.getAbonat().getNume(),
                 contact.getAbonat().getPrenume(),
                 contact.getAbonat().getCnp(),

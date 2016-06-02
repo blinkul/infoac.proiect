@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class NrTel implements Serializable{
     
-    String nrTel;
+    private String nrTel;
 
     public NrTel(String nrTel) {
         this.nrTel = nrTel;
