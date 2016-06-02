@@ -18,10 +18,13 @@ import javax.swing.JFileChooser;
 public class FileChooserController {
     
     private static FileChooserController instance;
-    
+    /**
+     * Metodele fileSaver si fileOpener creaza fereastra obiectului JFileChooser in momentul in care apasam Open sau Save.
+     * fileSaver se foloseste de metoda saveContact din clasa ContactController pentru a salva obiectele de tip Contact intr-un fisier de tip .txt
+     */
     public void fileSaver(List<Contact> contact) throws IOException{
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("."));
+        fc.setCurrentDirectory(new File("./Save"));
         fc.setDialogTitle("Salveaza Fisier");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fc.showSaveDialog(null);
@@ -30,7 +33,7 @@ public class FileChooserController {
     public File fileOpener(){
         ContactController openFileChooser = ContactController.getInstance();
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("."));
+        fc.setCurrentDirectory(new File("./Save"));
         fc.setDialogTitle("Deschide Fisier");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fc.showOpenDialog(null);

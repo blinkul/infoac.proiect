@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.print.Collation;
 import javax.swing.JFileChooser;
 
@@ -57,4 +58,5 @@ public class ContactController {
             instance = new ContactController();
         return instance;
     }
+
 }
