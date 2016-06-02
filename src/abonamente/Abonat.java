@@ -1,18 +1,18 @@
 package abonamente;
 
+import abonamente.gui.AgendaFrame;
 import java.io.Serializable;
 
 public class Abonat implements Serializable{
     private String cnp;
     private String nume, prenume;
-//    private static int id;
-//    private String idString;
+    private String id;
 
     public Abonat(String cnp, String nume, String prenume) {
         this.cnp = cnp;
         this.nume = nume;
         this.prenume = prenume;
-//        id++;
+        this.id = String.valueOf(AgendaFrame.getNumberOfRows());
     }
 
     public Abonat() {
@@ -45,12 +45,8 @@ public class Abonat implements Serializable{
         //sa implementeze exceptii
         this.prenume = prenume;
     }
-    
-//    public String getID(){
-//        //Returneaza id-ul ca string pentru a putea fi folosit in JTable
-//        this.idString = String.valueOf(id);
-//        return this.idString;
-//    }
-    
-    
+
+    public String getID(){
+        return id;
+    }
 }

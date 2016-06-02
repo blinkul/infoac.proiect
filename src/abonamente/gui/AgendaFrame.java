@@ -4,6 +4,7 @@ import abonamente.comparator.ComparatorCNP;
 import abonamente.comparator.ComparatorNume;
 import abonamente.comparator.ComparatorPrenume;
 import abonamente.Contact;
+import abonamente.comparator.ComparatorID;
 import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import java.awt.Container;
@@ -24,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,12 +36,14 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     List<Contact> contacte;
     DefaultTableModel dtm;
+    private static int ID=1;
 
     public AgendaFrame() {
         initComponents();
         buttonGroup1.add(radioSortareDupaNume);
         buttonGroup1.add(radioSortareDupaPrenume);
         buttonGroup1.add(radioSortareDupaCNP);
+        buttonGroup1.add(radioSortareDupaID);
         contacte = new ArrayList<>();
         dtm = new DefaultTableModel();
         dtm.setColumnIdentifiers(new String[]{"ID","Nume", "Prenume", "CNP", "Numar de telefon"});
@@ -62,7 +66,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         for (Contact contact : contacte) {
             dtm.addRow(new String[]{
-                contact.getID(),
+                contact.getAbonat().getID(),                
                 contact.getAbonat().getNume(),
                 contact.getAbonat().getPrenume(),
                 contact.getAbonat().getCnp(),
@@ -87,8 +91,11 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } else if (radioSortareDupaPrenume.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorPrenume());
                     afisareContacte();
-                } else {
+                } else if(radioSortareDupaCNP.isSelected()){
                     ContactController.getInstance().sortare(contacte, new ComparatorCNP());
+                    afisareContacte();
+                } else {
+                    ContactController.getInstance().sortare(contacte, new ComparatorID());
                     afisareContacte();
                 }
             }
@@ -155,6 +162,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 
             }
         });
+        
     }
 
     public void adaugaContact() {
@@ -162,6 +170,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
         String numar = nrTextField.getText();
+        incrementID();
         Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
         contacte.add(contact);
         afisareContacte();
@@ -170,6 +179,17 @@ public class AgendaFrame extends javax.swing.JFrame {
         cnpTextField.setText("");
         nrTextField.setText("");
         
+    }
+    //Citeste numarul de randuri din tabel si incrementeaza valoarea cu o unitate
+    //Populeaza campul static ID cand metoda adaugaContact() este utilizata (la apasarea butonului "Inserare Contact")
+    private void incrementID(){
+        ID = tabelContacte.getRowCount()+1;
+    }
+    //Metoda folosita in constructorul obiectului Abonat, pentru a putea incrementa fiecare instantiere.
+    //Foloseste valoarea campului static ID, populat de catre metoda incrementID(). 
+    public static int getNumberOfRows(){
+        int rows = ID;
+        return rows;
     }
 
     /**
@@ -199,6 +219,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         jCreateContact = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         tabelContacte = new javax.swing.JTable();
+        radioSortareDupaID = new javax.swing.JRadioButton();
         paneWest = new javax.swing.JPanel();
         labelReclamaWest = new javax.swing.JLabel();
         paneEast = new javax.swing.JPanel();
@@ -287,7 +308,11 @@ public class AgendaFrame extends javax.swing.JFrame {
         });
         tabelContacte.setAlignmentX(0.0F);
         tabelContacte.setAlignmentY(0.0F);
+        tabelContacte.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabelContacte.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane.setViewportView(tabelContacte);
+
+        radioSortareDupaID.setText("Sortare dupa ID");
 
         javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
         paneCenter.setLayout(paneCenterLayout);
@@ -296,6 +321,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonSort, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(radioSortareDupaPrenume)
                     .addComponent(radioSortareDupaNume)
                     .addGroup(paneCenterLayout.createSequentialGroup()
@@ -311,9 +337,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                             .addComponent(tfNume)
                             .addComponent(tfCNP)))
                     .addComponent(radioSortareDupaCNP)
-                    .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(buttonSort, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCreateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCreateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioSortareDupaID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -339,6 +364,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCreateContact)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radioSortareDupaID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(radioSortareDupaNume)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(radioSortareDupaPrenume)
@@ -540,6 +567,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelMare;
     private javax.swing.JTextField prenumeTextField;
     private javax.swing.JRadioButton radioSortareDupaCNP;
+    private javax.swing.JRadioButton radioSortareDupaID;
     private javax.swing.JRadioButton radioSortareDupaNume;
     private javax.swing.JRadioButton radioSortareDupaPrenume;
     private javax.swing.JTable tabelContacte;
