@@ -5,6 +5,7 @@ import abonamente.comparator.ComparatorNume;
 import abonamente.comparator.ComparatorPrenume;
 import abonamente.Contact;
 import abonamente.controller.ContactController;
+import abonamente.controller.FileChooserController;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -108,7 +109,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ContactController saveFileChooser = ContactController.getInstance();
+                FileChooserController saveFileChooser = FileChooserController.getInstance();
                 try {
                     saveFileChooser.fileSaver(contacte);
                 } catch (IOException ex) {
