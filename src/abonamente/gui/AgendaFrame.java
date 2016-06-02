@@ -76,13 +76,20 @@ public class AgendaFrame extends javax.swing.JFrame {
     }
 
     private void addListeners() {
-        jCreateContact.addActionListener(new ActionListener() {
+        butonGolesteLista.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                contacte.clear();
+                afisareContacte();
+            }
+        });
+        butonInsereazaContact.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adaugaContact();
             }
         });
-        buttonSort.addActionListener(new ActionListener() {
+        butonSort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (radioSortareDupaNume.isSelected()) {
@@ -180,11 +187,13 @@ public class AgendaFrame extends javax.swing.JFrame {
         nrTextField.setText("");
         
     }
+    
     //Citeste numarul de randuri din tabel si incrementeaza valoarea cu o unitate
     //Populeaza campul static ID cand metoda adaugaContact() este utilizata (la apasarea butonului "Inserare Contact")
     private void incrementID(){
         ID = tabelContacte.getRowCount()+1;
     }
+    
     //Metoda folosita in constructorul obiectului Abonat, pentru a putea incrementa fiecare instantiere.
     //Foloseste valoarea campului static ID, populat de catre metoda incrementID(). 
     public static int getNumberOfRows(){
@@ -204,7 +213,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         panelMare = new javax.swing.JPanel();
         paneCenter = new javax.swing.JPanel();
-        buttonSort = new javax.swing.JButton();
+        butonSort = new javax.swing.JButton();
         radioSortareDupaNume = new javax.swing.JRadioButton();
         radioSortareDupaPrenume = new javax.swing.JRadioButton();
         radioSortareDupaCNP = new javax.swing.JRadioButton();
@@ -216,10 +225,11 @@ public class AgendaFrame extends javax.swing.JFrame {
         tfPrenume = new javax.swing.JLabel();
         tfCNP = new javax.swing.JLabel();
         nrTelTextField = new javax.swing.JLabel();
-        jCreateContact = new javax.swing.JButton();
+        butonInsereazaContact = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         tabelContacte = new javax.swing.JTable();
         radioSortareDupaID = new javax.swing.JRadioButton();
+        butonGolesteLista = new javax.swing.JButton();
         paneWest = new javax.swing.JPanel();
         labelReclamaWest = new javax.swing.JLabel();
         paneEast = new javax.swing.JPanel();
@@ -249,13 +259,13 @@ public class AgendaFrame extends javax.swing.JFrame {
         paneCenter.setMinimumSize(new java.awt.Dimension(600, 400));
         paneCenter.setName(""); // NOI18N
 
-        buttonSort.setText("Sort");
-        buttonSort.setMaximumSize(null);
-        buttonSort.setMinimumSize(null);
-        buttonSort.setPreferredSize(new java.awt.Dimension(10, 23));
-        buttonSort.addActionListener(new java.awt.event.ActionListener() {
+        butonSort.setText("Sort");
+        butonSort.setMaximumSize(null);
+        butonSort.setMinimumSize(null);
+        butonSort.setPreferredSize(new java.awt.Dimension(10, 23));
+        butonSort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSortActionPerformed(evt);
+                butonSortActionPerformed(evt);
             }
         });
 
@@ -276,10 +286,10 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         nrTelTextField.setText("Numar Telefon");
 
-        jCreateContact.setText("Inserare Contact");
-        jCreateContact.addActionListener(new java.awt.event.ActionListener() {
+        butonInsereazaContact.setText("Inserare Contact");
+        butonInsereazaContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCreateContactActionPerformed(evt);
+                butonInsereazaContactActionPerformed(evt);
             }
         });
 
@@ -314,31 +324,36 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         radioSortareDupaID.setText("Sortare dupa ID");
 
+        butonGolesteLista.setText("Goleste Lista");
+
         javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
         paneCenter.setLayout(paneCenterLayout);
         paneCenterLayout.setHorizontalGroup(
             paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneCenterLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonSort, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioSortareDupaPrenume)
-                    .addComponent(radioSortareDupaNume)
                     .addGroup(paneCenterLayout.createSequentialGroup()
-                        .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(nrTextField)
-                            .addComponent(cnpTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numeTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1, 1, 1)
                         .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nrTelTextField)
-                            .addComponent(tfPrenume)
-                            .addComponent(tfNume)
-                            .addComponent(tfCNP)))
-                    .addComponent(radioSortareDupaCNP)
-                    .addComponent(jCreateContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioSortareDupaID))
+                            .addComponent(butonSort, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radioSortareDupaPrenume)
+                            .addComponent(radioSortareDupaNume)
+                            .addGroup(paneCenterLayout.createSequentialGroup()
+                                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(nrTextField)
+                                    .addComponent(cnpTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numeTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nrTelTextField)
+                                    .addComponent(tfPrenume)
+                                    .addComponent(tfNume)
+                                    .addComponent(tfCNP)))
+                            .addComponent(radioSortareDupaCNP)
+                            .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radioSortareDupaID)))
+                    .addComponent(butonGolesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -362,7 +377,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addComponent(nrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nrTelTextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCreateContact)
+                .addComponent(butonInsereazaContact)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(radioSortareDupaID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -372,8 +387,10 @@ public class AgendaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(radioSortareDupaCNP)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addComponent(butonSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(butonGolesteLista)
+                .addGap(53, 53, 53))
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -490,15 +507,15 @@ public class AgendaFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCreateContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateContactActionPerformed
+    private void butonInsereazaContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonInsereazaContactActionPerformed
         //am creat metoda addListeners()
         //nu am stiut cum sa mai sterg aceasta metoda
-    }//GEN-LAST:event_jCreateContactActionPerformed
+    }//GEN-LAST:event_butonInsereazaContactActionPerformed
 
-    private void buttonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSortActionPerformed
+    private void butonSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonSortActionPerformed
         //am creat metoda addListeners()
         //nu am stiut cum sa mai sterg aceasta metoda
-    }//GEN-LAST:event_buttonSortActionPerformed
+    }//GEN-LAST:event_butonSortActionPerformed
 
     private void menuItemInregistrareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInregistrareActionPerformed
         //am creat metoda addListeners()
@@ -541,10 +558,11 @@ public class AgendaFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton butonGolesteLista;
+    private javax.swing.JButton butonInsereazaContact;
+    private javax.swing.JButton butonSort;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton buttonSort;
     private javax.swing.JTextField cnpTextField;
-    private javax.swing.JButton jCreateContact;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JLabel labelReclamaEast;
