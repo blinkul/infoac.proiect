@@ -206,7 +206,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                         contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                         contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                         contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
-                        contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf3.getText());
+                        contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
                         afisareContacte();
                     }else{return;}
                 
