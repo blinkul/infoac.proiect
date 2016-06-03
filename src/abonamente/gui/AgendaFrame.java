@@ -216,6 +216,13 @@ public class AgendaFrame extends javax.swing.JFrame {
                 }
             }
         });
+        butonSterge.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                contacte.remove(tabelContacte.getSelectedRow());
+                afisareContacte();
+            }
+        });
         
     }
 
@@ -278,6 +285,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         radioSortareDupaID = new javax.swing.JRadioButton();
         butonGolesteLista = new javax.swing.JButton();
         butonEdit = new javax.swing.JButton();
+        butonSterge = new javax.swing.JButton();
         paneWest = new javax.swing.JPanel();
         labelReclamaWest = new javax.swing.JLabel();
         paneEast = new javax.swing.JPanel();
@@ -376,15 +384,20 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         butonEdit.setText("Editeaza rand selectat");
 
+        butonSterge.setText("Sterge Contact");
+
         javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
         paneCenter.setLayout(paneCenterLayout);
         paneCenterLayout.setHorizontalGroup(
             paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(butonGolesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(butonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(butonSterge, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(butonSort, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioSortareDupaPrenume)
                             .addComponent(radioSortareDupaNume)
@@ -402,9 +415,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                                     .addComponent(tfCNP)))
                             .addComponent(radioSortareDupaCNP)
                             .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(radioSortareDupaID)))
-                    .addComponent(butonGolesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(butonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(radioSortareDupaID))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -429,6 +440,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addComponent(nrTelTextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butonInsereazaContact)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(butonSterge)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(radioSortareDupaID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -615,6 +628,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JButton butonGolesteLista;
     private javax.swing.JButton butonInsereazaContact;
     private javax.swing.JButton butonSort;
+    private javax.swing.JButton butonSterge;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField cnpTextField;
     private javax.swing.JMenuBar jMenuBar1;
