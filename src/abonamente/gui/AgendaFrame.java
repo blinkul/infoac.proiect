@@ -9,6 +9,7 @@ import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -27,6 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.scripts.JO;
 
 /**
  *
@@ -169,6 +172,39 @@ public class AgendaFrame extends javax.swing.JFrame {
                 
             }
         });
+        butonEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(tabelContacte.isRowSelected(tabelContacte.getSelectedRow())){
+
+                JPanel editPanel = new JPanel();
+                editPanel.setLayout(new GridLayout(4,2,5,5));
+                
+                editPanel.add(new JLabel("Nume:\t"));
+                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1)));
+                editPanel.add(new JLabel("Prenume:\t"));
+                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2)));
+                editPanel.add(new JLabel("CNP:\t"));
+                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3)));
+                editPanel.add(new JLabel("Telefon:\t"));
+                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4)));
+               
+                
+                Object[] optiuni = {"Yes", "Cancel"};
+                int i = JOptionPane.showOptionDialog(null, editPanel, "Editare",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
+                
+                    if(i==JOptionPane.YES_OPTION){
+                         /** tabelContacte.getModel().setValueAt();**/
+                    }else{return;}
+                
+                }else{
+                    JOptionPane.showMessageDialog(new JPanel(), "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                    
+            }
+        });
         
     }
 
@@ -230,6 +266,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         tabelContacte = new javax.swing.JTable();
         radioSortareDupaID = new javax.swing.JRadioButton();
         butonGolesteLista = new javax.swing.JButton();
+        butonEdit = new javax.swing.JButton();
         paneWest = new javax.swing.JPanel();
         labelReclamaWest = new javax.swing.JLabel();
         paneEast = new javax.swing.JPanel();
@@ -326,6 +363,8 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         butonGolesteLista.setText("Goleste Lista");
 
+        butonEdit.setText("Editeaza rand selectat");
+
         javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
         paneCenter.setLayout(paneCenterLayout);
         paneCenterLayout.setHorizontalGroup(
@@ -353,7 +392,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                             .addComponent(radioSortareDupaCNP)
                             .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioSortareDupaID)))
-                    .addComponent(butonGolesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(butonGolesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(butonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -390,7 +430,9 @@ public class AgendaFrame extends javax.swing.JFrame {
                 .addComponent(butonSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butonGolesteLista)
-                .addGap(53, 53, 53))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(butonEdit)
+                .addGap(24, 24, 24))
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -558,6 +600,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton butonEdit;
     private javax.swing.JButton butonGolesteLista;
     private javax.swing.JButton butonInsereazaContact;
     private javax.swing.JButton butonSort;

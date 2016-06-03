@@ -169,6 +169,7 @@
                               </Group>
                           </Group>
                           <Component id="butonGolesteLista" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="butonEdit" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane" pref="365" max="32767" attributes="0"/>
@@ -212,7 +213,9 @@
                       <Component id="butonSort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="butonGolesteLista" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="butonEdit" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane" min="-2" pref="400" max="-2" attributes="0"/>
@@ -373,6 +376,11 @@
             <Component class="javax.swing.JButton" name="butonGolesteLista">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Goleste Lista"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="butonEdit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editeaza rand selectat"/>
               </Properties>
             </Component>
           </SubComponents>
