@@ -9,6 +9,8 @@ import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -175,34 +177,43 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                int rows =15;                
                 if(tabelContacte.isRowSelected(tabelContacte.getSelectedRow())){
 
                 JPanel editPanel = new JPanel();
                 editPanel.setLayout(new GridLayout(4,2,5,5));
                 
-                editPanel.add(new JLabel("Nume:\t"));
-                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1)));
-                editPanel.add(new JLabel("Prenume:\t"));
-                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2)));
-                editPanel.add(new JLabel("CNP:\t"));
-                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3)));
-                editPanel.add(new JLabel("Telefon:\t"));
-                editPanel.add(new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4)));
-               
+                JTextField tf1 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1),rows);
+                JTextField tf2 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2),rows);
+                JTextField tf3 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3),rows);
+                JTextField tf4 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4),rows);
+                
+                editPanel.add(new JLabel("Nume:"));
+                editPanel.add(tf1);
+                editPanel.add(new JLabel("Prenume:"));
+                editPanel.add(tf2);
+                editPanel.add(new JLabel("CNP:"));
+                editPanel.add(tf3);
+                editPanel.add(new JLabel("Telefon:"));
+                editPanel.add(tf4);             
                 
                 Object[] optiuni = {"Yes", "Cancel"};
-                int i = JOptionPane.showOptionDialog(null, editPanel, "Editare",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
+                int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
                 
                     if(i==JOptionPane.YES_OPTION){
-                         /** tabelContacte.getModel().setValueAt();**/
+//                                             
+                        contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
+                        contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
+                        contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
+                        contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf3.getText());
+                        afisareContacte();
                     }else{return;}
                 
                 }else{
                     JOptionPane.showMessageDialog(new JPanel(), "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-
-                    
             }
         });
         
