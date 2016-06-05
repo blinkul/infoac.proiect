@@ -14,10 +14,14 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -81,6 +85,19 @@ public class AgendaFrame extends javax.swing.JFrame {
     }
 
     private void addListeners() {
+        //Pentru butonul Close am adaugat System.exit(0) - idem si pentru buton EXIT din meniu
+        addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                exitProgram();
+            }
+        });
+        menuItemExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exitProgram();
+            }
+        });        
         butonGolesteLista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -164,16 +181,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new JPanel(), "Aceasta aplicatie a fost creata de Anghel Ciprian Liviu ca proiect pentru cursul de Java din cadrul InfoAcademy.");
             }
         });
-        menuItemExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int i = JOptionPane.showConfirmDialog(new JPanel(),"Doriti sa inchideti aplicatia?","Confirmare",JOptionPane.YES_NO_OPTION);
-                if(i==JOptionPane.YES_OPTION){
-                    System.exit(0);
-                }else{return;}
-                
-            }
-        });
+        
         butonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -253,6 +261,24 @@ public class AgendaFrame extends javax.swing.JFrame {
     public static int getNumberOfRows(){
         int rows = ID;
         return rows;
+    }
+    
+    public void exitProgram(){
+        int i = JOptionPane.showConfirmDialog(new JPanel(),"Doriti sa inchideti aplicatia?","Confirmare",JOptionPane.YES_NO_OPTION);
+                if(i==JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }else{return;}
+    }
+    
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask(){
+        @Override
+        public void run(){
+            labelReclamaWest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/cola1.jpg")));
+        }
+    };
+    public void runReclame(){
+        timer.schedule(task, 1000, 1000);
     }
 
     /**
