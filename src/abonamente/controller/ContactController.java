@@ -65,7 +65,6 @@ public class ContactController {
         }catch(ExceptieTelefonNumarCaractere e){
             JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");            
         }
-        
         return new Contact();
     }
     //polimorfism sortare

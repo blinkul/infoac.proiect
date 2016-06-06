@@ -120,25 +120,21 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonInsereazaContact.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-               
                 try {
                     adaugaContact();
                 } catch (ExceptieCnpNumarCaractere ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "test");
                 } catch (ExceptieTelefonNumarCaractere ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "test");
                 } catch (ExceptieFormatPrenume ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "test");
                 } catch (ExceptieFormatNume ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "test");
                 } catch (ExceptieFormatCnp ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "test");
                 } catch (ExceptieFormatTelefon ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "test");
                 }
-               
-                
             }
         });
         butonSort.addActionListener(new ActionListener() {
