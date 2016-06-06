@@ -43,7 +43,7 @@ public class ContactController {
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
-    public Contact createContact(String nume, String prenume, String cnp, String nrTel) throws ExceptieCnpNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp{
+    public Contact createContact(String nume, String prenume, String cnp, String nrTel) throws ExceptieCnpNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon, ExceptieTelefonNumarCaractere{
         Contact contact;
         Abonat abonat;
         NrTel nr;
@@ -53,14 +53,19 @@ public class ContactController {
         contact = new Contact(abonat, nr);
         return contact;
         }catch(ExceptieCnpNumarCaractere e){
-            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 caractere!");
+            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
         }catch(ExceptieFormatPrenume e){
             JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
         }catch(ExceptieFormatNume e){
             JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
         }catch(ExceptieFormatCnp e){
             JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");            
+        }catch(ExceptieFormatTelefon e){
+            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");            
+        }catch(ExceptieTelefonNumarCaractere e){
+            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");            
         }
+        
         return new Contact();
     }
     //polimorfism sortare

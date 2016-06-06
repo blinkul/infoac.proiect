@@ -12,6 +12,7 @@ import abonamente.exceptii_custom.ExceptieCnpNumarCaractere;
 import abonamente.exceptii_custom.ExceptieFormatCnp;
 import abonamente.exceptii_custom.ExceptieFormatNume;
 import abonamente.exceptii_custom.ExceptieFormatPrenume;
+import abonamente.exceptii_custom.ExceptieFormatTelefon;
 import abonamente.exceptii_custom.ExceptieTelefonNumarCaractere;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -133,6 +134,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ExceptieFormatCnp ex) {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExceptieFormatTelefon ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                
                 
@@ -250,11 +253,15 @@ public class AgendaFrame extends javax.swing.JFrame {
                         } catch (ExceptieFormatCnp ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
                         } catch (ExceptieCnpNumarCaractere ex) {
-                            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 caractere!");
+                            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
                         } catch (ExceptieFormatNume ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
                         } catch (ExceptieFormatPrenume ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
+                        } catch (ExceptieFormatTelefon ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
+                        } catch (ExceptieTelefonNumarCaractere ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
                         }
                     } else {
                         return;
@@ -276,7 +283,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     }
 
-    public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp{
+    public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon{
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
