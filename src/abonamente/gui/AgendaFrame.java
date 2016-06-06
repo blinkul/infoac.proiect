@@ -253,6 +253,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 caractere!");
                         } catch (ExceptieFormatNume ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
+                        } catch (ExceptieFormatPrenume ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
                         }
                     } else {
                         return;

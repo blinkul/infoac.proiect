@@ -63,8 +63,12 @@ public class Abonat implements Serializable {
         return prenume;
     }
 
-    public void setPrenume(String prenume){
+    public void setPrenume(String prenume) throws ExceptieFormatPrenume{
+        if(!(Pattern.matches("^[a-zA-Z]+$", prenume))){
+            throw new ExceptieFormatPrenume();
+        }else{
         this.prenume = prenume;
+        }
     }
 
     public String getID() {
