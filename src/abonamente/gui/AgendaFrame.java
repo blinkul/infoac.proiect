@@ -7,6 +7,7 @@ import abonamente.Contact;
 import abonamente.comparator.ComparatorID;
 import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
+import abonamente.controller.ReclameTask;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -19,6 +20,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,9 +48,11 @@ public class AgendaFrame extends javax.swing.JFrame {
     List<Contact> contacte;
     DefaultTableModel dtm;
     private static int ID=1;
+    Timer timer;
 
     public AgendaFrame() {
         initComponents();
+        timer = new Timer();
         buttonGroup1.add(radioSortareDupaNume);
         buttonGroup1.add(radioSortareDupaPrenume);
         buttonGroup1.add(radioSortareDupaCNP);
@@ -64,6 +68,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         //*******************************************************************************
+        runReclame();
     }
 
     private void afisareContacte() {
@@ -169,6 +174,9 @@ public class AgendaFrame extends javax.swing.JFrame {
                    menuItemSave.setEnabled(true);
                    menuItemOpen.setEnabled(true);
                    menuItemInregistrare.setEnabled(false);
+                   labelReclamaEast.setVisible(false);
+                   labelReclamaWest.setVisible(false);
+                   timer.cancel();
                    JOptionPane.showMessageDialog(new JPanel(), "Codul a fost validat cu succes. Acum beneficiati de optiunile Open si Save");
                 }else{
                    JOptionPane.showMessageDialog(new JPanel(),"Codul introdus nu este corect.\nAsigurati-va ca nu aveti CapsLock activ.", "Codul este incorect!", JOptionPane.WARNING_MESSAGE);
@@ -270,16 +278,13 @@ public class AgendaFrame extends javax.swing.JFrame {
             System.exit(0);
         }else{return;}
     }
-    
-    Timer timer = new Timer();
-    TimerTask task = new TimerTask(){
-        @Override
-        public void run(){
-            labelReclamaWest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/cola1.jpg")));
-        }
-    };
+  
     public void runReclame(){
-        timer.schedule(task, 1000, 1000);
+        List<JLabel> listaLabels = new ArrayList<>();
+        listaLabels.add(labelReclamaWest);
+        listaLabels.add(labelReclamaEast);
+        TimerTask task = new ReclameTask(listaLabels);
+        timer.schedule(task, 1000, 2000);
     }
 
     /**
@@ -293,6 +298,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanel1 = new javax.swing.JPanel();
         panelMare = new javax.swing.JPanel();
         paneCenter = new javax.swing.JPanel();
         butonSort = new javax.swing.JButton();
@@ -335,6 +341,19 @@ public class AgendaFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(1000, 400));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 400));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
 
         panelMare.setPreferredSize(new java.awt.Dimension(1000, 400));
         panelMare.setRequestFocusEnabled(false);
@@ -448,7 +467,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                             .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioSortareDupaID))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE))
         );
         paneCenterLayout.setVerticalGroup(
             paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,15 +567,21 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         panelMare.add(paneEast, java.awt.BorderLayout.EAST);
 
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(panelMare, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelMare, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(450, 450, 450)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,6 +590,11 @@ public class AgendaFrame extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addComponent(panelMare, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(155, 155, 155)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         menuFile.setText("File");
@@ -686,6 +716,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JTextField cnpTextField;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JLabel labelReclamaEast;
     private javax.swing.JLabel labelReclamaWest;
