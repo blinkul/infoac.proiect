@@ -4,6 +4,7 @@ import abonamente.Abonat;
 import abonamente.Contact;
 import abonamente.NrTel;
 import abonamente.NrTel;
+import abonamente.exceptii_custom.ExceptieInstantiereAbonat;
 import abonamente.gui.AgendaFrame;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -41,11 +42,16 @@ public class ContactController {
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
-    public Contact createContact(String nume, String prenume, String cnp, String nrTel){
+    public Contact createContact(String nume, String prenume, String cnp, String nrTel) throws ExceptieInstantiereAbonat{
+        Contact temp = new Contact(new Abonat("0", "null", "null"), new NrTel("0"));
+        try{
         Abonat abonat = new Abonat(cnp, nume, prenume);
         NrTel nr = new NrTel(nrTel);
         Contact contact = new Contact(abonat, nr);
         return contact;
+        }catch(ExceptieInstantiereAbonat ex){
+            return temp;
+        }
     }
     //polimorfism sortare
     public List<Contact> sortare(List<Contact> contacte, Comparator<Contact> comparator){

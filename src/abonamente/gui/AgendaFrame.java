@@ -8,6 +8,7 @@ import abonamente.comparator.ComparatorID;
 import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import abonamente.controller.ReclameTask;
+import abonamente.exceptii_custom.*;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -220,12 +221,19 @@ public class AgendaFrame extends javax.swing.JFrame {
                     int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
 
                     if (i == JOptionPane.YES_OPTION) {
-//                                             
-                        contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
-                        contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
-                        contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
-                        contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
-                        afisareContacte();
+
+                        try {
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
+                            afisareContacte();
+                        } catch (ExceptieValidareLitere ex) {
+                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi litere (a-z sau A-Z)!");
+                        } catch (ExceptieValidareNumere ex) {
+                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
+                        }
+
                     } else {
                         return;
                     }
@@ -252,8 +260,10 @@ public class AgendaFrame extends javax.swing.JFrame {
         String cnp = cnpTextField.getText();
         String numar = nrTextField.getText();
         incrementID();
+       
         Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
         contacte.add(contact);
+            
         afisareContacte();
         numeTextField.setText("");
         prenumeTextField.setText("");
@@ -720,7 +730,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             public void run() {
                 AgendaFrame frame = new AgendaFrame();
                 frame.setVisible(true);
-                
+
                 //Folosesc un swing.Timer pentru ca Splash Screenul sa ramana vizibil timp de 2 secunde                
                 frame.panelMare.setVisible(false);
                 javax.swing.Timer timer = new javax.swing.Timer(2000, new ActionListener() {
