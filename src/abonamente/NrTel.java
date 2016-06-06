@@ -1,21 +1,32 @@
 package abonamente;
 
+import abonamente.exceptii_custom.ExceptieInstantiereNumar;
+import abonamente.exceptii_custom.ExceptieValidareNumere;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 public class NrTel implements Serializable{
     
     private String nrTel;
 
     public NrTel(String nrTel) {
-        this.nrTel = nrTel;
+        try {
+            setNr(nrTel);
+        } catch (ExceptieInstantiereNumar ex) {
+            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)");
+        }
     }
     
-    public void setNr(String nrTel) {
+    public void setNr(String nrTel) throws ExceptieInstantiereNumar{
+        if (!(Pattern.matches("^[0-9]+$", nrTel))) {
+            throw new ExceptieInstantiereNumar();
+        } else {
+             this.nrTel=nrTel;
+        }
         this.nrTel=nrTel;
-        //sa accepte numai format de 10 caractere
-        //sa nu accepte alteceva decat cifre
-        //sa se formateze 0726 328 982
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getNr() {

@@ -236,6 +236,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Va rugam sa folositi litere (a-z sau A-Z)!");
                         } catch (ExceptieValidareNumere ex) {
                             JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
+                        } catch (ExceptieInstantiereNumar ex) {
+                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
                         }
 
                     } else {
