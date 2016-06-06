@@ -149,9 +149,11 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } else if (radioSortareDupaCNP.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorCNP());
                     afisareContacte();
-                } else {
+                } else if(radioSortareDupaID.isSelected()){
                     ContactController.getInstance().sortare(contacte, new ComparatorID());
                     afisareContacte();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Pentru sortare alegeti una dintre optiunile de mai jos!");
                 }
             }
         });
@@ -264,7 +266,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(new JPanel(), "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
             }
@@ -272,8 +274,12 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonSterge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                contacte.remove(tabelContacte.getSelectedRow());
-                afisareContacte();
+                if (tabelContacte.isRowSelected(tabelContacte.getSelectedRow())){
+                    contacte.remove(tabelContacte.getSelectedRow());
+                    afisareContacte();  
+                }else{
+                    JOptionPane.showMessageDialog(null, "Pentru stergerea unui contact este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
