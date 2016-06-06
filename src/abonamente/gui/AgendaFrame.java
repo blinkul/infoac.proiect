@@ -8,6 +8,11 @@ import abonamente.comparator.ComparatorID;
 import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import abonamente.controller.ReclameTask;
+import abonamente.exceptii_custom.ExceptieCnpNumarCaractere;
+import abonamente.exceptii_custom.ExceptieFormatCnp;
+import abonamente.exceptii_custom.ExceptieFormatNume;
+import abonamente.exceptii_custom.ExceptieFormatPrenume;
+import abonamente.exceptii_custom.ExceptieTelefonNumarCaractere;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -115,7 +120,21 @@ public class AgendaFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
+               
+                try {
                     adaugaContact();
+                } catch (ExceptieCnpNumarCaractere ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExceptieTelefonNumarCaractere ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExceptieFormatPrenume ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExceptieFormatNume ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExceptieFormatCnp ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
                 
             }
         });
@@ -222,15 +241,19 @@ public class AgendaFrame extends javax.swing.JFrame {
                     int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
 
                     if (i == JOptionPane.YES_OPTION) {
-
-                       
+                        try{
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
                             afisareContacte();
-                       
-
+                        } catch (ExceptieFormatCnp ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
+                        } catch (ExceptieCnpNumarCaractere ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 caractere!");
+                        } catch (ExceptieFormatNume ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
+                        }
                     } else {
                         return;
                     }
@@ -251,7 +274,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     }
 
-    public void adaugaContact(){
+    public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp{
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
