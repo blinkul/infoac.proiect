@@ -224,36 +224,34 @@
                               <Component id="butonSterge" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="butonGolesteLista" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="butonSort" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="numeTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="prenumeTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <Component id="cnpTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <Component id="nrTextField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="butonInsereazaContact" min="-2" pref="151" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="nrTelTextField" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfPrenume" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfNume" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfCNP" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="numeTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tfNume" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cnpTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tfCNP" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="prenumeTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tfPrenume" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="butonInsereazaContact" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="radioSortareDupaID" min="-2" max="-2" attributes="0"/>
                               <Component id="radioSortareDupaNume" min="-2" max="-2" attributes="0"/>
                               <Component id="radioSortareDupaPrenume" min="-2" max="-2" attributes="0"/>
                               <Component id="radioSortareDupaCNP" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="nrTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="nrTelTextField" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane" pref="561" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane" pref="562" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -261,27 +259,27 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="numeTextField" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="numeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tfNume" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="prenumeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="prenumeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tfPrenume" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cnpTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfCNP" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tfCNP" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="nrTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="nrTelTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="nrTelTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="butonInsereazaContact" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="butonInsereazaContact" min="-2" pref="23" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="butonSterge" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
