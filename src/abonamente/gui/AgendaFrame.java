@@ -115,7 +115,11 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonInsereazaContact.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                adaugaContact();
+                try {
+                    adaugaContact();
+                } catch (ExceptieInstantiereAbonat ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         butonSort.addActionListener(new ActionListener() {
@@ -254,15 +258,19 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     }
 
-    public void adaugaContact() {
+    public void adaugaContact() throws ExceptieInstantiereAbonat {
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
         String numar = nrTextField.getText();
         incrementID();
        
-        Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
-        contacte.add(contact);
+        Contact contact;
+            contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
+            contacte.add(contact);
+       
+       
+       
             
         afisareContacte();
         numeTextField.setText("");
