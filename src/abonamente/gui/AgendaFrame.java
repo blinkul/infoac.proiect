@@ -264,10 +264,11 @@ public class AgendaFrame extends javax.swing.JFrame {
     }
     
     public void exitProgram(){
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         int i = JOptionPane.showConfirmDialog(new JPanel(),"Doriti sa inchideti aplicatia?","Confirmare",JOptionPane.YES_NO_OPTION);
-                if(i==JOptionPane.YES_OPTION){
-                    System.exit(0);
-                }else{return;}
+        if(i==JOptionPane.YES_OPTION){
+            System.exit(0);
+        }else{return;}
     }
     
     Timer timer = new Timer();
