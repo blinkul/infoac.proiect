@@ -8,7 +8,6 @@ import abonamente.comparator.ComparatorID;
 import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import abonamente.controller.ReclameTask;
-import abonamente.exceptii_custom.*;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -115,11 +114,9 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonInsereazaContact.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
+                
                     adaugaContact();
-                } catch (ExceptieInstantiereAbonat ex) {
-                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
             }
         });
         butonSort.addActionListener(new ActionListener() {
@@ -226,21 +223,13 @@ public class AgendaFrame extends javax.swing.JFrame {
 
                     if (i == JOptionPane.YES_OPTION) {
 
-                        try {
+                       
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
                             afisareContacte();
-                        } catch (ExceptieValidareLitere ex) {
-//                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi litere (a-z sau A-Z)!");
-                        } catch (ExceptieValidareNumere ex) {
-//                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
-                        } catch (ExceptieInstantiereNumar ex) {
-//                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
-                        } catch (ExceptieNumarDeCaractereTel ex) {
-//                            JOptionPane.showMessageDialog(null, "Campul 'Numar Telefon' trebuie sa contina 10 caractere!");
-                        }
+                       
 
                     } else {
                         return;
@@ -262,7 +251,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     }
 
-    public void adaugaContact() throws ExceptieInstantiereAbonat{
+    public void adaugaContact(){
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
