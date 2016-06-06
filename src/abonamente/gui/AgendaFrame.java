@@ -47,7 +47,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     List<Contact> contacte;
     DefaultTableModel dtm;
-    private static int ID=1;
+    private static int ID = 1;
     Timer timer;
 
     public AgendaFrame() {
@@ -59,7 +59,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         buttonGroup1.add(radioSortareDupaID);
         contacte = new ArrayList<>();
         dtm = new DefaultTableModel();
-        dtm.setColumnIdentifiers(new String[]{"ID","Nume", "Prenume", "CNP", "Numar de telefon"});
+        dtm.setColumnIdentifiers(new String[]{"ID", "Nume", "Prenume", "CNP", "Numar de telefon"});
         tabelContacte.setModel(dtm);
         tabelContacte.getColumnModel().getColumn(0).setPreferredWidth(10);
         afisareContacte();
@@ -69,6 +69,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         //*******************************************************************************
         runReclame();
+
     }
 
     private void afisareContacte() {
@@ -80,7 +81,7 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         for (Contact contact : contacte) {
             dtm.addRow(new String[]{
-                contact.getAbonat().getID(),                
+                contact.getAbonat().getID(),
                 contact.getAbonat().getNume(),
                 contact.getAbonat().getPrenume(),
                 contact.getAbonat().getCnp(),
@@ -91,9 +92,9 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     private void addListeners() {
         //Pentru butonul Close am adaugat System.exit(0) - idem si pentru buton EXIT din meniu
-        addWindowListener(new WindowAdapter(){
+        addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e){
+            public void windowClosing(WindowEvent e) {
                 exitProgram();
             }
         });
@@ -102,7 +103,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 exitProgram();
             }
-        });        
+        });
         butonGolesteLista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,7 +126,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } else if (radioSortareDupaPrenume.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorPrenume());
                     afisareContacte();
-                } else if(radioSortareDupaCNP.isSelected()){
+                } else if (radioSortareDupaCNP.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorCNP());
                     afisareContacte();
                 } else {
@@ -134,7 +135,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         menuItemOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,7 +147,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                afisareContacte();                    
+                afisareContacte();
             }
         });
         menuItemSave.addActionListener(new ActionListener() {
@@ -158,29 +159,30 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               
+
             }
         });
-        
+
         /**
-         * Dupa validarea codului de inregistrare optiunile Open si Save devin active iar optiunea de Inregistrare devine inactiva.
-         * Codul de validare = cisco
+         * Dupa validarea codului de inregistrare optiunile Open si Save devin
+         * active iar optiunea de Inregistrare devine inactiva. Codul de
+         * validare = cisco
          */
         menuItemInregistrare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String input = JOptionPane.showInputDialog(new JPanel() ,"Introduceti codul de validare!");
-                if(input.equals("cisco")){
-                   menuItemSave.setEnabled(true);
-                   menuItemOpen.setEnabled(true);
-                   menuItemInregistrare.setEnabled(false);
-                   labelReclamaEast.setVisible(false);
-                   labelReclamaWest.setVisible(false);
-                   timer.cancel();
-                   JOptionPane.showMessageDialog(new JPanel(), "Codul a fost validat cu succes. Acum beneficiati de optiunile Open si Save");
-                }else{
-                   JOptionPane.showMessageDialog(new JPanel(),"Codul introdus nu este corect.\nAsigurati-va ca nu aveti CapsLock activ.", "Codul este incorect!", JOptionPane.WARNING_MESSAGE);
-                }                              
+                String input = JOptionPane.showInputDialog(new JPanel(), "Introduceti codul de validare!");
+                if (input.equals("cisco")) {
+                    menuItemSave.setEnabled(true);
+                    menuItemOpen.setEnabled(true);
+                    menuItemInregistrare.setEnabled(false);
+                    labelReclamaEast.setVisible(false);
+                    labelReclamaWest.setVisible(false);
+                    timer.cancel();
+                    JOptionPane.showMessageDialog(new JPanel(), "Codul a fost validat cu succes. Acum beneficiati de optiunile Open si Save");
+                } else {
+                    JOptionPane.showMessageDialog(new JPanel(), "Codul introdus nu este corect.\nAsigurati-va ca nu aveti CapsLock activ.", "Codul este incorect!", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         menuItemAbout.addActionListener(new ActionListener() {
@@ -189,44 +191,46 @@ public class AgendaFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new JPanel(), "Aceasta aplicatie a fost creata de Anghel Ciprian Liviu ca proiect pentru cursul de Java din cadrul InfoAcademy.");
             }
         });
-        
+
         butonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                int rows =15;                
-                if(tabelContacte.isRowSelected(tabelContacte.getSelectedRow())){
 
-                JPanel editPanel = new JPanel();
-                editPanel.setLayout(new GridLayout(4,2,5,5));
-                
-                JTextField tf1 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1),rows);
-                JTextField tf2 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2),rows);
-                JTextField tf3 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3),rows);
-                JTextField tf4 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4),rows);
-                
-                editPanel.add(new JLabel("Nume:"));
-                editPanel.add(tf1);
-                editPanel.add(new JLabel("Prenume:"));
-                editPanel.add(tf2);
-                editPanel.add(new JLabel("CNP:"));
-                editPanel.add(tf3);
-                editPanel.add(new JLabel("Telefon:"));
-                editPanel.add(tf4);             
-                
-                Object[] optiuni = {"Yes", "Cancel"};
-                int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
-                
-                    if(i==JOptionPane.YES_OPTION){
+                int rows = 15;
+                if (tabelContacte.isRowSelected(tabelContacte.getSelectedRow())) {
+
+                    JPanel editPanel = new JPanel();
+                    editPanel.setLayout(new GridLayout(4, 2, 5, 5));
+
+                    JTextField tf1 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1), rows);
+                    JTextField tf2 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2), rows);
+                    JTextField tf3 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3), rows);
+                    JTextField tf4 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4), rows);
+
+                    editPanel.add(new JLabel("Nume:"));
+                    editPanel.add(tf1);
+                    editPanel.add(new JLabel("Prenume:"));
+                    editPanel.add(tf2);
+                    editPanel.add(new JLabel("CNP:"));
+                    editPanel.add(tf3);
+                    editPanel.add(new JLabel("Telefon:"));
+                    editPanel.add(tf4);
+
+                    Object[] optiuni = {"Yes", "Cancel"};
+                    int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
+
+                    if (i == JOptionPane.YES_OPTION) {
 //                                             
                         contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                         contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                         contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
                         contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
                         afisareContacte();
-                    }else{return;}
-                
-                }else{
+                    } else {
+                        return;
+                    }
+
+                } else {
                     JOptionPane.showMessageDialog(new JPanel(), "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
@@ -239,7 +243,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 afisareContacte();
             }
         });
-        
+
     }
 
     public void adaugaContact() {
@@ -255,31 +259,33 @@ public class AgendaFrame extends javax.swing.JFrame {
         prenumeTextField.setText("");
         cnpTextField.setText("");
         nrTextField.setText("");
-        
+
     }
-    
+
     //Citeste numarul de randuri din tabel si incrementeaza valoarea cu o unitate
     //Populeaza campul static ID cand metoda adaugaContact() este utilizata (la apasarea butonului "Inserare Contact")
-    private void incrementID(){
-        ID = tabelContacte.getRowCount()+1;
+    private void incrementID() {
+        ID = tabelContacte.getRowCount() + 1;
     }
-    
+
     //Metoda folosita in constructorul obiectului Abonat, pentru a putea incrementa fiecare instantiere.
     //Foloseste valoarea campului static ID, populat de catre metoda incrementID(). 
-    public static int getNumberOfRows(){
+    public static int getNumberOfRows() {
         int rows = ID;
         return rows;
     }
-    
-    public void exitProgram(){
+
+    public void exitProgram() {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        int i = JOptionPane.showConfirmDialog(new JPanel(),"Doriti sa inchideti aplicatia?","Confirmare",JOptionPane.YES_NO_OPTION);
-        if(i==JOptionPane.YES_OPTION){
+        int i = JOptionPane.showConfirmDialog(new JPanel(), "Doriti sa inchideti aplicatia?", "Confirmare", JOptionPane.YES_NO_OPTION);
+        if (i == JOptionPane.YES_OPTION) {
             System.exit(0);
-        }else{return;}
+        } else {
+            return;
+        }
     }
-  
-    public void runReclame(){
+
+    public void runReclame() {
         List<JLabel> listaLabels = new ArrayList<>();
         listaLabels.add(labelReclamaWest);
         listaLabels.add(labelReclamaEast);
@@ -298,7 +304,8 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jPanel1 = new javax.swing.JPanel();
+        paneSplashScreen = new javax.swing.JPanel();
+        labelSplashScreen = new javax.swing.JLabel();
         panelMare = new javax.swing.JPanel();
         paneCenter = new javax.swing.JPanel();
         butonSort = new javax.swing.JButton();
@@ -342,17 +349,19 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(1000, 400));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 400));
+        paneSplashScreen.setPreferredSize(new java.awt.Dimension(1000, 400));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+        labelSplashScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/splashScreen.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout paneSplashScreenLayout = new javax.swing.GroupLayout(paneSplashScreen);
+        paneSplashScreen.setLayout(paneSplashScreenLayout);
+        paneSplashScreenLayout.setHorizontalGroup(
+            paneSplashScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelSplashScreen)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        paneSplashScreenLayout.setVerticalGroup(
+            paneSplashScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelSplashScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         panelMare.setPreferredSize(new java.awt.Dimension(1000, 400));
@@ -467,7 +476,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                             .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioSortareDupaID))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
         );
         paneCenterLayout.setVerticalGroup(
             paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,21 +576,20 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         panelMare.add(paneEast, java.awt.BorderLayout.EAST);
 
-        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(paneSplashScreen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(panelMare, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelMare, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(450, 450, 450)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(paneSplashScreen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 20, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,8 +600,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addContainerGap()))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(155, 155, 155)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paneSplashScreen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -649,8 +656,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -701,9 +707,24 @@ public class AgendaFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgendaFrame().setVisible(true);
+                AgendaFrame frame = new AgendaFrame();
+                frame.setVisible(true);
+                
+                //Folosesc un swing.Timer pentru ca Splash Screenul sa ramana vizibil timp de 2 secunde                
+                frame.panelMare.setVisible(false);
+                javax.swing.Timer timer = new javax.swing.Timer(2000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        frame.paneSplashScreen.setVisible(false);
+                        frame.panelMare.setVisible(true);
+                    }
+                });
+                timer.setInitialDelay(2000);
+                timer.setRepeats(false);
+                timer.start();
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -716,10 +737,10 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JTextField cnpTextField;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JLabel labelReclamaEast;
     private javax.swing.JLabel labelReclamaWest;
+    private javax.swing.JLabel labelSplashScreen;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuItemAbout;
@@ -734,6 +755,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JTextField numeTextField;
     private javax.swing.JPanel paneCenter;
     private javax.swing.JPanel paneEast;
+    private javax.swing.JPanel paneSplashScreen;
     private javax.swing.JPanel paneWest;
     private javax.swing.JPanel panelMare;
     private javax.swing.JTextField prenumeTextField;
