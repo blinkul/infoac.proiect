@@ -123,17 +123,17 @@ public class AgendaFrame extends javax.swing.JFrame {
                 try {
                     adaugaContact();
                 } catch (ExceptieCnpNumarCaractere ex) {
-                    JOptionPane.showMessageDialog(null, "test");
+                    JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
                 } catch (ExceptieTelefonNumarCaractere ex) {
-                    JOptionPane.showMessageDialog(null, "test");
+                    JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
                 } catch (ExceptieFormatPrenume ex) {
-                    JOptionPane.showMessageDialog(null, "test");
+                    JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
                 } catch (ExceptieFormatNume ex) {
-                    JOptionPane.showMessageDialog(null, "test");
+                    JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
                 } catch (ExceptieFormatCnp ex) {
-                    JOptionPane.showMessageDialog(null, "test");
+                    JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
                 } catch (ExceptieFormatTelefon ex) {
-                    JOptionPane.showMessageDialog(null, "test");
+                    JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
                 }
             }
         });

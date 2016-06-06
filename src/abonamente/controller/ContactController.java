@@ -43,36 +43,16 @@ public class ContactController {
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
-    public Contact createContact(String nume, String prenume, String cnp, String nrTel) throws ExceptieCnpNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon, ExceptieTelefonNumarCaractere{
-        Contact contact;
-        Contact crashContact = new Contact(new Abonat("null", "null", "0000000000000"), new NrTel("0000000000"));
-        Abonat abonat;
-        NrTel nr;
-        try{
-        abonat = new Abonat(nume, prenume, cnp);
-        nr = new NrTel(nrTel);
-        contact = new Contact(abonat, nr);
-        return contact;
-        }catch(ExceptieCnpNumarCaractere e){
-            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
-            return crashContact; 
-        }catch(ExceptieFormatPrenume e){
-            JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
-            return crashContact; 
-        }catch(ExceptieFormatNume e){
-            JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
-            return crashContact; 
-        }catch(ExceptieFormatCnp e){
-            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
-            return crashContact;             
-        }catch(ExceptieFormatTelefon e){
-            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
-            return crashContact;             
-        }catch(ExceptieTelefonNumarCaractere e){
-            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
-            return crashContact;               
-        }
-        
+    public Contact createContact(String nume, String prenume, String cnp, String nrTel) throws ExceptieCnpNumarCaractere, 
+                                                                                               ExceptieFormatPrenume, 
+                                                                                               ExceptieFormatNume, 
+                                                                                               ExceptieFormatCnp, 
+                                                                                               ExceptieFormatTelefon, 
+                                                                                               ExceptieTelefonNumarCaractere{
+        Abonat abonat = new Abonat(nume, prenume, cnp);
+        NrTel nr = new NrTel(nrTel);
+        Contact contact = new Contact(abonat, nr);
+        return contact;        
     }
     //polimorfism sortare
     public List<Contact> sortare(List<Contact> contacte, Comparator<Contact> comparator){
