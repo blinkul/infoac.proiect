@@ -233,11 +233,13 @@ public class AgendaFrame extends javax.swing.JFrame {
                             contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
                             afisareContacte();
                         } catch (ExceptieValidareLitere ex) {
-                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi litere (a-z sau A-Z)!");
+//                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi litere (a-z sau A-Z)!");
                         } catch (ExceptieValidareNumere ex) {
-                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
+//                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
                         } catch (ExceptieInstantiereNumar ex) {
-                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
+//                            JOptionPane.showMessageDialog(null, "Va rugam sa folositi cifre (0-9)!");
+                        } catch (ExceptieNumarDeCaractereTel ex) {
+//                            JOptionPane.showMessageDialog(null, "Campul 'Numar Telefon' trebuie sa contina 10 caractere!");
                         }
 
                     } else {
@@ -260,20 +262,14 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     }
 
-    public void adaugaContact() throws ExceptieInstantiereAbonat {
+    public void adaugaContact() throws ExceptieInstantiereAbonat{
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
         String cnp = cnpTextField.getText();
         String numar = nrTextField.getText();
         incrementID();
-       
-        Contact contact;
-            contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
-            contacte.add(contact);
-       
-       
-       
-            
+        Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
+        contacte.add(contact);
         afisareContacte();
         numeTextField.setText("");
         prenumeTextField.setText("");
@@ -750,7 +746,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                         frame.panelMare.setVisible(true);
                     }
                 });
-                timer.setInitialDelay(2000);
+                timer.setInitialDelay(0); //2000
                 timer.setRepeats(false);
                 timer.start();
             }
