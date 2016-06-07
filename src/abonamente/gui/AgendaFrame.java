@@ -133,13 +133,17 @@ public class AgendaFrame extends javax.swing.JFrame {
                     verificaAdaugaContact();
                 } else {
                     String cnpIntrodus = cnpTextField.getText();
-                    String telIntrodus = nrTelTextField.getText();
+                    String telIntrodus = nrTextField.getText();
                     comparatorCNP = new ComparatorCNP();
                     comparatorTel = new ComparatorNumarTelefon();
                     try {
                         for (Contact contact : contacte) {
                             comparatorCNP.compareCNP(cnpIntrodus, contact.getAbonat().getCnp()); //returneaza TRUE daca CNP introdus este deja in baza de date
                             comparatorTel.compareTelefon(telIntrodus, contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
+                            
+//                            System.out.println(cnpIntrodus+"  "+contact.getAbonat().getCnp());
+//                            System.out.println(telIntrodus+"  "+contact.getNrTel().getNr());
+                            
                         }
                         JOptionPane.showMessageDialog(null, "Contact introdus");
                         verificaAdaugaContact();
@@ -393,10 +397,10 @@ public class AgendaFrame extends javax.swing.JFrame {
         prenumeTextField = new javax.swing.JTextField();
         cnpTextField = new javax.swing.JTextField();
         nrTextField = new javax.swing.JTextField();
-        tfNume = new javax.swing.JLabel();
-        tfPrenume = new javax.swing.JLabel();
-        tfCNP = new javax.swing.JLabel();
-        nrTelTextField = new javax.swing.JLabel();
+        labelNume = new javax.swing.JLabel();
+        labePrenume = new javax.swing.JLabel();
+        labelCNP = new javax.swing.JLabel();
+        labelNrTel = new javax.swing.JLabel();
         butonInsereazaContact = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         tabelContacte = new javax.swing.JTable();
@@ -404,7 +408,6 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonGolesteLista = new javax.swing.JButton();
         butonEdit = new javax.swing.JButton();
         butonSterge = new javax.swing.JButton();
-        butonCautare = new javax.swing.JButton();
         radioSortareDupaNumarTel = new javax.swing.JRadioButton();
         paneWest = new javax.swing.JPanel();
         labelReclamaWest = new javax.swing.JLabel();
@@ -472,13 +475,13 @@ public class AgendaFrame extends javax.swing.JFrame {
         numeTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         numeTextField.setAutoscrolls(false);
 
-        tfNume.setText("Nume");
+        labelNume.setText("Nume");
 
-        tfPrenume.setText("Prenume");
+        labePrenume.setText("Prenume");
 
-        tfCNP.setText("CNP");
+        labelCNP.setText("CNP");
 
-        nrTelTextField.setText("Numar Telefon");
+        labelNrTel.setText("Numar Telefon");
 
         butonInsereazaContact.setText("Inserare Contact");
         butonInsereazaContact.setMinimumSize(new java.awt.Dimension(115, 20));
@@ -526,8 +529,6 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         butonSterge.setText("Sterge Contact");
 
-        butonCautare.setText("Cautare");
-
         radioSortareDupaNumarTel.setText("Sortare dupa Numar de Telefon");
 
         javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
@@ -537,7 +538,6 @@ public class AgendaFrame extends javax.swing.JFrame {
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(butonCautare, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(butonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(butonSterge, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(butonGolesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,15 +545,15 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfNume))
+                        .addComponent(labelNume))
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addComponent(cnpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfCNP))
+                        .addComponent(labelCNP))
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfPrenume))
+                        .addComponent(labePrenume))
                     .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(radioSortareDupaID)
                     .addComponent(radioSortareDupaNume)
@@ -562,7 +562,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addComponent(nrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nrTelTextField))
+                        .addComponent(labelNrTel))
                     .addComponent(radioSortareDupaNumarTel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE))
@@ -573,28 +573,26 @@ public class AgendaFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNume))
+                    .addComponent(labelNume))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prenumeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPrenume))
+                    .addComponent(labePrenume))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cnpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCNP))
+                    .addComponent(labelCNP))
                 .addGap(6, 6, 6)
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nrTelTextField))
+                    .addComponent(labelNrTel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butonInsereazaContact, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butonSterge)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butonEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(butonCautare)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(butonGolesteLista)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(butonSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -821,7 +819,6 @@ public class AgendaFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton butonCautare;
     private javax.swing.JButton butonEdit;
     private javax.swing.JButton butonGolesteLista;
     private javax.swing.JButton butonInsereazaContact;
@@ -832,6 +829,10 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JLabel labePrenume;
+    private javax.swing.JLabel labelCNP;
+    private javax.swing.JLabel labelNrTel;
+    private javax.swing.JLabel labelNume;
     private javax.swing.JLabel labelReclamaEast;
     private javax.swing.JLabel labelReclamaWest;
     private javax.swing.JLabel labelSplashScreen;
@@ -844,7 +845,6 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemSave;
     private javax.swing.JPopupMenu.Separator menuItemSeparator;
     private javax.swing.JPopupMenu.Separator menuItemSeparator2;
-    private javax.swing.JLabel nrTelTextField;
     private javax.swing.JTextField nrTextField;
     private javax.swing.JTextField numeTextField;
     private javax.swing.JPanel paneCenter;
@@ -859,9 +859,6 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioSortareDupaNume;
     private javax.swing.JRadioButton radioSortareDupaPrenume;
     private javax.swing.JTable tabelContacte;
-    private javax.swing.JLabel tfCNP;
-    private javax.swing.JLabel tfNume;
-    private javax.swing.JLabel tfPrenume;
     // End of variables declaration//GEN-END:variables
 
 }

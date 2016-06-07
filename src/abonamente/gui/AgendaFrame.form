@@ -219,7 +219,6 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="butonCautare" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="butonEdit" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="butonSterge" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="butonGolesteLista" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
@@ -227,17 +226,17 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="numeTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfNume" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNume" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="cnpTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfCNP" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelCNP" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="prenumeTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfPrenume" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labePrenume" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="butonInsereazaContact" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="radioSortareDupaID" min="-2" max="-2" attributes="0"/>
@@ -247,7 +246,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="nrTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="nrTelTextField" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNrTel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="radioSortareDupaNumarTel" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -262,22 +261,22 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="numeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfNume" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelNume" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="prenumeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfPrenume" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labePrenume" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cnpTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfCNP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelCNP" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="nrTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="nrTelTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelNrTel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="butonInsereazaContact" min="-2" pref="23" max="-2" attributes="0"/>
@@ -285,9 +284,7 @@
                           <Component id="butonSterge" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="butonEdit" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="butonCautare" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="butonGolesteLista" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="butonSort" min="-2" max="-2" attributes="0"/>
@@ -355,22 +352,22 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="nrTextField">
                 </Component>
-                <Component class="javax.swing.JLabel" name="tfNume">
+                <Component class="javax.swing.JLabel" name="labelNume">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nume"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tfPrenume">
+                <Component class="javax.swing.JLabel" name="labePrenume">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Prenume"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="tfCNP">
+                <Component class="javax.swing.JLabel" name="labelCNP">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="CNP"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="nrTelTextField">
+                <Component class="javax.swing.JLabel" name="labelNrTel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Numar Telefon"/>
                   </Properties>
@@ -478,11 +475,6 @@
                 <Component class="javax.swing.JButton" name="butonSterge">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Sterge Contact"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="butonCautare">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cautare"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="radioSortareDupaNumarTel">
