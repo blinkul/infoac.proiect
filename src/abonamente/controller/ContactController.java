@@ -44,12 +44,30 @@ public class ContactController {
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
+    
+    public List<Contact> searchContacts(List<Contact> lista, String nume, String prenume, String cnp, String nrTel){
+        List<Contact> listaTemp = new ArrayList<>();
+        for(Contact contact:lista){
+            if(
+               contact.getAbonat().getNume().contains(nume) &&
+               contact.getAbonat().getPrenume().contains(prenume) &&
+               contact.getAbonat().getCnp().contains(cnp) && 
+               contact.getNrTel().getNr().contains(nrTel)     
+               )
+            {
+                listaTemp.add(contact);
+            }
+        }
+        return listaTemp;
+    }
+    
     public Contact createContact(String nume, String prenume, String cnp, String nrTel) throws ExceptieCnpNumarCaractere, 
                                                                                                ExceptieFormatPrenume, 
                                                                                                ExceptieFormatNume, 
                                                                                                ExceptieFormatCnp, 
                                                                                                ExceptieFormatTelefon, 
-                                                                                               ExceptieTelefonNumarCaractere{
+                                                                                               ExceptieTelefonNumarCaractere
+    {
         Abonat abonat = new Abonat(nume, prenume, cnp);
         NrTel nr = new NrTel(nrTel);
         Contact contact = new Contact(abonat, nr);

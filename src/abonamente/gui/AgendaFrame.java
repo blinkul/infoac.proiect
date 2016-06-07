@@ -24,6 +24,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -63,6 +65,10 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     public AgendaFrame() {
         initComponents();
+        numeTextField.setFocusable(true);
+        prenumeTextField.setFocusable(true);
+        cnpTextField.setFocusable(true);
+        nrTextField.setFocusable(true);
         timer = new Timer();
         buttonGroup1.add(radioSortareDupaNume);
         buttonGroup1.add(radioSortareDupaPrenume);
@@ -860,5 +866,23 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioSortareDupaPrenume;
     private javax.swing.JTable tabelContacte;
     // End of variables declaration//GEN-END:variables
+    
+    
+    class SearchKeyListener extends KeyAdapter{
 
+        @Override
+        public void keyTyped(KeyEvent e) {
+            String nume, prenume, cnp, nrTel;
+            nume = numeTextField.getText();
+            prenume = prenumeTextField.getText();
+            cnp = cnpTextField.getText();
+            nrTel = nrTextField.getText();
+            
+            List<Contact> contacteTemp = ContactController.getInstance().searchContacts(contacte, nume, prenume, cnp, nrTel);
+            
+            
+        }
+        
+    }
 }
+
