@@ -314,8 +314,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
 
             if (i == JOptionPane.YES_OPTION) {
-                try {
-                    comparaCnpSiNumar(tf3.getText(), tf4.getText());
+                try {                    
                     //Insereaza noile valoari din textFielduri inapoi in tabela, pe randul selectat
                     contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                     contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
