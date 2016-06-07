@@ -285,12 +285,21 @@ public class AgendaFrame extends javax.swing.JFrame {
                     int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
 
                     if (i == JOptionPane.YES_OPTION) {
-                        try {
+                        
+                        //Primul TRY block verifica daca CNP ul exista deja in baza de date.
+                        try {                           
+                            comparatorCNP = new ComparatorCNP();
+                            
+                            for (Contact contact : contacte) {
+//                                System.out.println(tf3.getText()+" = "+contact.getAbonat().getCnp());
+                                comparatorCNP.compareCNP(tf3.getText(), contact.getAbonat().getCnp()); //returneaza TRUE daca CNP introdus este deja in baza de date
+                            }
+                          
                             //Insereaza noile valoari din textFielduri inapoi in tabela, pe randul selectat
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
-                            contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
+                            
                             afisareContacte(contacte);
                         } catch (ExceptieFormatCnp ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
@@ -300,11 +309,34 @@ public class AgendaFrame extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
                         } catch (ExceptieFormatPrenume ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
+                        } catch (ExceptieCnpDuplicat ex) {
+                            JOptionPane.showMessageDialog(null, "CNP-ul pentru contactul introdus exista deja in baza de date!");
+                        }//end Primul TRY
+                        
+                        //Al doilea TRY block verifica daca Numarul de telefon exista deja in baza de date
+                        try{
+                            comparatorTel = new ComparatorNumarTelefon();
+                            for (Contact contact : contacte) {
+                                comparatorTel.compareTelefon(tf4.getText(), contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
+                            }
+                            
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
+                            
+                            afisareContacte(contacte);
+                        } catch (ExceptieFormatNume ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
+                        } catch (ExceptieFormatPrenume ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
                         } catch (ExceptieFormatTelefon ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
                         } catch (ExceptieTelefonNumarCaractere ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
-                        }
+                        }catch (ExceptieNumarTelefonDuplicat ex) {
+                            JOptionPane.showMessageDialog(null, "Numarul de Telefon pentru contactul introdus exista deja in baza de date!");
+                        }//end al Doilea TRY
+                        
                     } else {
                         return;
                     }
