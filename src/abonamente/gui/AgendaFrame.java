@@ -159,28 +159,11 @@ public class AgendaFrame extends javax.swing.JFrame {
                 //Daca lista nu este goala se verifica CNP-ul introdus cu CNP-urile deja existente (idem Numar de Telefon).
                 //Am ales sa compar doar prin CNP si Numar de Telefon pentru ca numele pot coincide.
                 if (contacte.isEmpty()) {
-                    verificaAdaugaContact();
+                    verificaAdaugareContact();
                 } else {
                     String cnpIntrodus = cnpTextField.getText();
                     String telIntrodus = nrTextField.getText();
-                    comparatorCNP = new ComparatorCNP();
-                    comparatorTel = new ComparatorNumarTelefon();
-                    try {
-                        for (Contact contact : contacte) {
-                            comparatorCNP.compareCNP(cnpIntrodus, contact.getAbonat().getCnp()); //returneaza TRUE daca CNP introdus este deja in baza de date
-                            comparatorTel.compareTelefon(telIntrodus, contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
-                            
-//                            System.out.println(cnpIntrodus+"  "+contact.getAbonat().getCnp());
-//                            System.out.println(telIntrodus+"  "+contact.getNrTel().getNr());
-                            
-                        }
-                        JOptionPane.showMessageDialog(null, "Contact introdus");
-                        verificaAdaugaContact();
-                    } catch (ExceptieCnpDuplicat ex) {
-                        JOptionPane.showMessageDialog(null, "CNP-ul pentru contactul introdus exista deja in baza de date!");
-                    } catch (ExceptieNumarTelefonDuplicat ex) {
-                        JOptionPane.showMessageDialog(null, "Numarul de Telefon pentru contactul introdus exista deja in baza de date!");
-                    }
+                    comparaCnpSiNumar(cnpIntrodus, telIntrodus);
                 }
             }
         });
@@ -298,11 +281,12 @@ public class AgendaFrame extends javax.swing.JFrame {
             JPanel editPanel = new JPanel();
             editPanel.setLayout(new GridLayout(4, 2, 5, 5));
 
+            //TextFieldurile de mai jos se populeaza cu informatiile din randul selectat din tabel
             JTextField tf1 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1), rows);
             JTextField tf2 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2), rows);
             JTextField tf3 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3), rows);
             JTextField tf4 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4), rows);
-
+            
             editPanel.add(new JLabel("Nume:"));
             editPanel.add(tf1);
             editPanel.add(new JLabel("Prenume:"));
@@ -317,6 +301,8 @@ public class AgendaFrame extends javax.swing.JFrame {
 
             if (i == JOptionPane.YES_OPTION) {
                 try {
+                    comparaCnpSiNumar(tf3.getText(), tf4.getText());
+                    //Insereaza noile valoari din textFielduri inapoi in tabela, pe randul selectat
                     contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
                     contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                     contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
@@ -344,6 +330,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             return;
         }
     }
+    
     public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon{
         String nume = numeTextField.getText();
         String prenume = prenumeTextField.getText();
@@ -358,7 +345,8 @@ public class AgendaFrame extends javax.swing.JFrame {
         cnpTextField.setText("");
         nrTextField.setText("");
     }
-    public void verificaAdaugaContact() {
+   
+    public void verificaAdaugareContact() {
         try {
             adaugaContact();
         } catch (ExceptieCnpNumarCaractere ex) {
@@ -373,6 +361,27 @@ public class AgendaFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
         } catch (ExceptieFormatTelefon ex) {
             JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
+        }
+    }
+    
+    //am creat aceasta metoda pentru a putea refolosi codul cand butoanele Inserare Contact sau Edit sunt apasate
+    public void comparaCnpSiNumar(String cnpIntrodus, String telIntrodus){
+        comparatorCNP = new ComparatorCNP();
+        comparatorTel = new ComparatorNumarTelefon();
+        try {
+            for (Contact contact : contacte) {
+                comparatorCNP.compareCNP(cnpIntrodus, contact.getAbonat().getCnp()); //returneaza TRUE daca CNP introdus este deja in baza de date
+                comparatorTel.compareTelefon(telIntrodus, contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
+
+//                            System.out.println(cnpIntrodus+"  "+contact.getAbonat().getCnp());
+//                            System.out.println(telIntrodus+"  "+contact.getNrTel().getNr());
+            }
+            JOptionPane.showMessageDialog(null, "Contact introdus");
+            verificaAdaugareContact();
+        } catch (ExceptieCnpDuplicat ex) {
+            JOptionPane.showMessageDialog(null, "CNP-ul pentru contactul introdus exista deja in baza de date!");
+        } catch (ExceptieNumarTelefonDuplicat ex) {
+            JOptionPane.showMessageDialog(null, "Numarul de Telefon pentru contactul introdus exista deja in baza de date!");
         }
     }
     
