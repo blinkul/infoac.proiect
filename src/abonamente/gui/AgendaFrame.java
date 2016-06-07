@@ -364,7 +364,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 }
             }
         });
-
+        //Key Listeneri pentru facilitatea de search din fiecare TextField
         SearchKeyListener searchListener = new SearchKeyListener();
         numeTextField.addKeyListener(searchListener);
         prenumeTextField.addKeyListener(searchListener);
@@ -945,7 +945,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     
     
     
-    //Clasa este creata pentru a face posibila optiunea de search.
+    //Clasa Interioara - este creata pentru a face posibila optiunea de search.
     class SearchKeyListener extends KeyAdapter{
 
         @Override
