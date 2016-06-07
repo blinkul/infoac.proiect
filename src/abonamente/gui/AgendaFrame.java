@@ -139,7 +139,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     try {
                         for (Contact contact : contacte) {
                             comparatorCNP.compareCNP(cnpIntrodus, contact.getAbonat().getCnp()); //returneaza TRUE daca CNP introdus este deja in baza de date
-                            comparatorTel.compareTelefon(cnpIntrodus, contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
+                            comparatorTel.compareTelefon(telIntrodus, contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
                         }
                         JOptionPane.showMessageDialog(null, "Contact introdus");
                         verificaAdaugaContact();
