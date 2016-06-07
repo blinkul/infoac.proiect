@@ -44,6 +44,12 @@ public class ContactController {
         contact = (List<Contact>)ois.readObject();
         return contact;
     }
+    public List<Contact> openContactAuto() throws IOException, ClassNotFoundException {
+        List<Contact> contact = new ArrayList<>();
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./Save/TestFile"));
+        contact = (List<Contact>) ois.readObject();
+        return contact;
+    }
     
     public List<Contact> searchContacts(List<Contact> lista, String nume, String prenume, String cnp, String nrTel){
         List<Contact> listaTemp = new ArrayList<>();

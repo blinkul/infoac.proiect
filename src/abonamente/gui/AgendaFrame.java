@@ -62,6 +62,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     Timer timer;
     ComparatorCNP comparatorCNP;
     ComparatorNumarTelefon comparatorTel;
+    ContactController openFileChooser;
 
     public AgendaFrame() {
         initComponents();
@@ -79,8 +80,10 @@ public class AgendaFrame extends javax.swing.JFrame {
         dtm.setColumnIdentifiers(new String[]{"ID", "Nume", "Prenume", "CNP", "Numar de telefon"});
         tabelContacte.setModel(dtm);
         tabelContacte.getColumnModel().getColumn(0).setPreferredWidth(10);
+        loadDefaultFile();
         afisareContacte(contacte);
         addListeners();
+                
         //*******************************************************************************
         menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
@@ -105,6 +108,18 @@ public class AgendaFrame extends javax.swing.JFrame {
                 contact.getNrTel().getNr()
             });
         }
+    }
+    
+    //Aceasta metoda deschide automat fisierul TestFile
+    private void loadDefaultFile(){
+        openFileChooser = ContactController.getInstance();
+                try {
+                    contacte = openFileChooser.openContactAuto();
+                } catch (IOException ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }
 
     private void addListeners() {
@@ -184,7 +199,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ContactController openFileChooser = ContactController.getInstance();
+                openFileChooser = ContactController.getInstance();
                 try {
                     contacte = openFileChooser.openContact();
                 } catch (IOException ex) {
@@ -374,7 +389,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             return;
         }
     }
-
+    
     public void runReclame() {
         List<JLabel> listaLabels = new ArrayList<>();
         listaLabels.add(labelReclamaWest);
