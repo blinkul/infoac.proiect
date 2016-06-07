@@ -49,10 +49,10 @@ public class ContactController {
         List<Contact> listaTemp = new ArrayList<>();
         for(Contact contact:lista){
             if(
-               contact.getAbonat().getNume().contains(nume) &&
-               contact.getAbonat().getPrenume().contains(prenume) &&
-               contact.getAbonat().getCnp().contains(cnp) && 
-               contact.getNrTel().getNr().contains(nrTel)     
+               contact.getAbonat().getNume().toLowerCase().contains(nume.toLowerCase()) &&
+               contact.getAbonat().getPrenume().toLowerCase().contains(prenume.toLowerCase()) &&
+               contact.getAbonat().getCnp().toLowerCase().contains(cnp.toLowerCase()) && 
+               contact.getNrTel().getNr().toLowerCase().contains(nrTel.toLowerCase())     
                )
             {
                 listaTemp.add(contact);

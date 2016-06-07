@@ -79,7 +79,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         dtm.setColumnIdentifiers(new String[]{"ID", "Nume", "Prenume", "CNP", "Numar de telefon"});
         tabelContacte.setModel(dtm);
         tabelContacte.getColumnModel().getColumn(0).setPreferredWidth(10);
-        afisareContacte();
+        afisareContacte(contacte);
         addListeners();
         //*******************************************************************************
         menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
@@ -89,14 +89,14 @@ public class AgendaFrame extends javax.swing.JFrame {
 
     }
 
-    private void afisareContacte() {
+    private void afisareContacte(List<Contact> contacteDeAfisat) {
         if (dtm.getRowCount() > 0) {
             for (int i = dtm.getRowCount() - 1; i > -1; i--) {
                 dtm.removeRow(i);
             }
         }
 
-        for (Contact contact : contacte) {
+        for (Contact contact : contacteDeAfisat) {
             dtm.addRow(new String[]{
                 contact.getAbonat().getID(),
                 contact.getAbonat().getNume(),
@@ -125,7 +125,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contacte.clear();
-                afisareContacte();
+                afisareContacte(contacte);
             }
         });
         butonInsereazaContact.addActionListener(new ActionListener() {
@@ -166,21 +166,18 @@ public class AgendaFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (radioSortareDupaNume.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorNume());
-                    afisareContacte();
                 } else if (radioSortareDupaPrenume.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorPrenume());
-                    afisareContacte();
                 } else if (radioSortareDupaCNP.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorCNP());
-                    afisareContacte();
                 } else if (radioSortareDupaID.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorID());
-                    afisareContacte();
                 } else if (radioSortareDupaNumarTel.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorNumarTelefon());
                 } else {
                     JOptionPane.showMessageDialog(null, "Pentru sortare alegeti una dintre optiunile de mai jos!");
                 }
+                afisareContacte(contacte);
             }
         });
 
@@ -195,7 +192,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AgendaFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                afisareContacte();
+                afisareContacte(contacte);
             }
         });
         menuItemSave.addActionListener(new ActionListener() {
@@ -273,7 +270,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
                             contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
-                            afisareContacte();
+                            afisareContacte(contacte);
                         } catch (ExceptieFormatCnp ex) {
                             JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
                         } catch (ExceptieCnpNumarCaractere ex) {
@@ -304,7 +301,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                     int i = JOptionPane.showConfirmDialog(null, "Doriti sa stergeti contactul?", "Confirmare", JOptionPane.YES_NO_OPTION);
                     if (i == JOptionPane.YES_OPTION) {
                         contacte.remove(tabelContacte.getSelectedRow());
-                        afisareContacte();
+                        afisareContacte(contacte);
                     } else {
                         return;
                     }                    
@@ -314,7 +311,13 @@ public class AgendaFrame extends javax.swing.JFrame {
             }
         });
 
-    }
+        SearchKeyListener searchListener = new SearchKeyListener();
+        numeTextField.addKeyListener(searchListener);
+        prenumeTextField.addKeyListener(searchListener);
+        cnpTextField.addKeyListener(searchListener);
+        nrTextField.addKeyListener(searchListener);
+        
+    }//end of addListeners()
 
     public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon{
         String nume = numeTextField.getText();
@@ -324,7 +327,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         incrementID();
         Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
         contacte.add(contact);
-        afisareContacte();
+        afisareContacte(contacte);
         numeTextField.setText("");
         prenumeTextField.setText("");
         cnpTextField.setText("");
@@ -880,7 +883,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             
             List<Contact> contacteTemp = ContactController.getInstance().searchContacts(contacte, nume, prenume, cnp, nrTel);
             
-            
+            afisareContacte(contacteTemp);
         }
         
     }
