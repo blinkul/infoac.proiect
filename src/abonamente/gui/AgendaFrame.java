@@ -377,11 +377,13 @@ public class AgendaFrame extends javax.swing.JFrame {
     
     public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon{
         String nume = numeTextField.getText();
+        String numeOutput = nume.substring(0, 1).toUpperCase() + nume.substring(1).toLowerCase();
         String prenume = prenumeTextField.getText();
+        String prenumeOutput = prenume.substring(0, 1).toUpperCase() + prenume.substring(1).toLowerCase();
         String cnp = cnpTextField.getText();
         String numar = nrTextField.getText();
         incrementID();
-        Contact contact = ContactController.getInstance().createContact(nume, prenume, cnp, numar);
+        Contact contact = ContactController.getInstance().createContact(numeOutput, prenumeOutput, cnp, numar);
         contacte.add(contact);
         afisareContacte(contacte);
         numeTextField.setText("");
