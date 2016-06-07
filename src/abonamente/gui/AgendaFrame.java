@@ -638,7 +638,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         paneWest.setPreferredSize(new java.awt.Dimension(100, 400));
 
         labelReclamaWest.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelReclamaWest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/reclama1.jpg"))); // NOI18N
+        labelReclamaWest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/cola1.jpg"))); // NOI18N
         labelReclamaWest.setAlignmentY(0.0F);
         labelReclamaWest.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
@@ -663,7 +663,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         paneEast.setPreferredSize(new java.awt.Dimension(100, 400));
 
         labelReclamaEast.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelReclamaEast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/reclama2.jpg"))); // NOI18N
+        labelReclamaEast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abonamente/imagini/reclama/cola1.jpg"))); // NOI18N
         labelReclamaEast.setAlignmentY(0.0F);
 
         javax.swing.GroupLayout paneEastLayout = new javax.swing.GroupLayout(paneEast);
