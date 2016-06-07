@@ -84,12 +84,19 @@ public class AgendaFrame extends javax.swing.JFrame {
         loadDefaultFile();
         afisareContacte(contacte);
         addListeners();
-                
+        runReclame();
+        //mnemonics**********************************************************************
+        menuFile.setMnemonic(KeyEvent.VK_F);
+        menuHelp.setMnemonic(KeyEvent.VK_H);
+        menuItemExit.setMnemonic(KeyEvent.VK_E);
+        menuItemOpen.setMnemonic(KeyEvent.VK_O);
+        menuItemSave.setMnemonic(KeyEvent.VK_S);
+        menuItemInregistrare.setMnemonic(KeyEvent.VK_I);
+        menuItemAbout.setMnemonic(KeyEvent.VK_A);
         //*******************************************************************************
         menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         //*******************************************************************************
-        runReclame();
 
     }
 
