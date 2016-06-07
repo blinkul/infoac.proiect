@@ -223,10 +223,16 @@
                               <Component id="butonSterge" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="butonGolesteLista" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               <Component id="butonSort" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="butonInsereazaContact" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Component id="radioSortareDupaID" min="-2" max="-2" attributes="0"/>
+                              <Component id="radioSortareDupaNume" min="-2" max="-2" attributes="0"/>
+                              <Component id="radioSortareDupaPrenume" min="-2" max="-2" attributes="0"/>
+                              <Component id="radioSortareDupaCNP" min="-2" max="-2" attributes="0"/>
+                              <Component id="radioSortareDupaNumarTel" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="numeTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="nrTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labelNume" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNrTel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="cnpTextField" min="-2" pref="150" max="-2" attributes="0"/>
@@ -238,19 +244,14 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="labePrenume" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="butonInsereazaContact" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
-                              <Component id="radioSortareDupaID" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioSortareDupaNume" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioSortareDupaPrenume" min="-2" max="-2" attributes="0"/>
-                              <Component id="radioSortareDupaCNP" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="nrTextField" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="numeTextField" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labelNrTel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNume" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="radioSortareDupaNumarTel" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Component id="jScrollPane" pref="562" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -260,7 +261,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="15" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="numeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="labelNume" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -275,7 +278,7 @@
                                       <Component id="cnpTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="labelCNP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="nrTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="labelNrTel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -300,9 +303,8 @@
                                   <Component id="radioSortareDupaCNP" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="radioSortareDupaNumarTel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Component id="jScrollPane" pref="0" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -487,6 +489,11 @@
                 <Component class="javax.swing.JRadioButton" name="radioSortareDupaNumarTel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Sortare dupa Numar de Telefon"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Campurile au dubla functie: Insert + Search"/>
                   </Properties>
                 </Component>
               </SubComponents>
