@@ -347,6 +347,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                 }
             }
         });
+        
         butonSterge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
