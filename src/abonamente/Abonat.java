@@ -14,20 +14,10 @@ public class Abonat implements Serializable {
     private String id;
 
     public Abonat(String nume, String prenume, String cnp) throws ExceptieCnpNumarCaractere, ExceptieFormatNume, ExceptieFormatPrenume, ExceptieFormatCnp{
-//        if(cnp.length() != 13){
-//            throw new ExceptieCnpNumarCaractere();
-//        }else if(!(Pattern.matches("^[a-zA-Z]+$", nume))){
-//            throw new ExceptieFormatNume();
-//        }else if(!(Pattern.matches("^[a-zA-Z]+$", prenume))){
-//            throw new ExceptieFormatPrenume();
-//        }else if(!(Pattern.matches("^[0-9]+$", cnp))){
-//            throw new ExceptieFormatCnp();
-//        }else{
             setCnp(cnp);
             setNume(nume);
             setPrenume(prenume);
-            this.id = String.valueOf(AgendaFrame.getNumberOfRows());
-//        }
+            this.id = String.valueOf(AgendaFrame.getID());
     }
 
     public Abonat() {

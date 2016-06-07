@@ -1,5 +1,6 @@
 package abonamente.gui;
 
+import abonamente.Abonat;
 import abonamente.comparator.ComparatorCNP;
 import abonamente.comparator.ComparatorNume;
 import abonamente.comparator.ComparatorPrenume;
@@ -410,15 +411,17 @@ public class AgendaFrame extends javax.swing.JFrame {
     
     //Citeste numarul de randuri din tabel si incrementeaza valoarea cu o unitate
     //Populeaza campul static ID cand metoda adaugaContact() este utilizata (la apasarea butonului "Inserare Contact")
-    private void incrementID() {
-        ID = tabelContacte.getRowCount() + 1;
+    public void incrementID() {
+        ID = contacte.size() + ID;
+//        for(Contact contact : contacte){
+//        System.out.println("ID = "+ID+", ID Contact = "+contact.getAbonat().getID());
+//        }
     }
 
     //Metoda folosita in constructorul obiectului Abonat, pentru a putea incrementa fiecare instantiere.
     //Foloseste valoarea campului static ID, populat de catre metoda incrementID(). 
-    public static int getNumberOfRows() {
-        int rows = ID;
-        return rows;
+    public static int getID() {
+        return ID;
     }
 
     public void exitProgram() {
