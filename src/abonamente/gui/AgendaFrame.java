@@ -5,14 +5,17 @@ import abonamente.comparator.ComparatorNume;
 import abonamente.comparator.ComparatorPrenume;
 import abonamente.Contact;
 import abonamente.comparator.ComparatorID;
+import abonamente.comparator.ComparatorNumarTelefon;
 import abonamente.controller.ContactController;
 import abonamente.controller.FileChooserController;
 import abonamente.controller.ReclameTask;
+import abonamente.exceptii_custom.ExceptieCnpDuplicat;
 import abonamente.exceptii_custom.ExceptieCnpNumarCaractere;
 import abonamente.exceptii_custom.ExceptieFormatCnp;
 import abonamente.exceptii_custom.ExceptieFormatNume;
 import abonamente.exceptii_custom.ExceptieFormatPrenume;
 import abonamente.exceptii_custom.ExceptieFormatTelefon;
+import abonamente.exceptii_custom.ExceptieNumarTelefonDuplicat;
 import abonamente.exceptii_custom.ExceptieTelefonNumarCaractere;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -55,6 +58,8 @@ public class AgendaFrame extends javax.swing.JFrame {
     DefaultTableModel dtm;
     private static int ID = 1;
     Timer timer;
+    ComparatorCNP comparatorCNP;
+    ComparatorNumarTelefon comparatorTel;
 
     public AgendaFrame() {
         initComponents();
@@ -120,20 +125,29 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonInsereazaContact.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    adaugaContact();
-                } catch (ExceptieCnpNumarCaractere ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
-                } catch (ExceptieTelefonNumarCaractere ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
-                } catch (ExceptieFormatPrenume ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
-                } catch (ExceptieFormatNume ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
-                } catch (ExceptieFormatCnp ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
-                } catch (ExceptieFormatTelefon ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
+                //La apasarea butonului Insereaza Contact se face o verificare daca lista este goala.
+                //Daca lista este goala se insereaza contact fara a mai verifica CNP si Numar de Telefon
+                //Daca lista nu este goala se verifica CNP-ul introdus cu CNP-urile deja existente (idem Numar de Telefon).
+                //Am ales sa compar doar prin CNP si Numar de Telefon pentru ca numele pot coincide.
+                if (contacte.isEmpty()) {
+                    verificaAdaugaContact();
+                } else {
+                    String cnpIntrodus = cnpTextField.getText();
+                    String telIntrodus = nrTelTextField.getText();
+                    comparatorCNP = new ComparatorCNP();
+                    comparatorTel = new ComparatorNumarTelefon();
+                    try {
+                        for (Contact contact : contacte) {
+                            comparatorCNP.compareCNP(cnpIntrodus, contact.getAbonat().getCnp()); //returneaza TRUE daca CNP introdus este deja in baza de date
+                            comparatorTel.compareTelefon(cnpIntrodus, contact.getNrTel().getNr()); //returneaza TRUE daca Numar Telefon introdus este deja in baza de date
+                        }
+                        JOptionPane.showMessageDialog(null, "Contact introdus");
+                        verificaAdaugaContact();
+                    } catch (ExceptieCnpDuplicat ex) {
+                        JOptionPane.showMessageDialog(null, "CNP-ul pentru contactul introdus exista deja in baza de date!");
+                    } catch (ExceptieNumarTelefonDuplicat ex) {
+                        JOptionPane.showMessageDialog(null, "Numarul de Telefon pentru contactul introdus exista deja in baza de date!");
+                    }
                 }
             }
         });
@@ -149,10 +163,12 @@ public class AgendaFrame extends javax.swing.JFrame {
                 } else if (radioSortareDupaCNP.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorCNP());
                     afisareContacte();
-                } else if(radioSortareDupaID.isSelected()){
+                } else if (radioSortareDupaID.isSelected()) {
                     ContactController.getInstance().sortare(contacte, new ComparatorID());
                     afisareContacte();
-                }else{
+                } else if (radioSortareDupaNumarTel.isSelected()) {
+                    ContactController.getInstance().sortare(contacte, new ComparatorNumarTelefon());
+                } else {
                     JOptionPane.showMessageDialog(null, "Pentru sortare alegeti una dintre optiunile de mai jos!");
                 }
             }
@@ -303,8 +319,25 @@ public class AgendaFrame extends javax.swing.JFrame {
         prenumeTextField.setText("");
         cnpTextField.setText("");
         nrTextField.setText("");
-
     }
+    public void verificaAdaugaContact() {
+        try {
+            adaugaContact();
+        } catch (ExceptieCnpNumarCaractere ex) {
+            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
+        } catch (ExceptieTelefonNumarCaractere ex) {
+            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
+        } catch (ExceptieFormatPrenume ex) {
+            JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
+        } catch (ExceptieFormatNume ex) {
+            JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
+        } catch (ExceptieFormatCnp ex) {
+            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
+        } catch (ExceptieFormatTelefon ex) {
+            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
+        }
+    }
+    
 
     //Citeste numarul de randuri din tabel si incrementeaza valoarea cu o unitate
     //Populeaza campul static ID cand metoda adaugaContact() este utilizata (la apasarea butonului "Inserare Contact")
@@ -372,6 +405,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonEdit = new javax.swing.JButton();
         butonSterge = new javax.swing.JButton();
         butonCautare = new javax.swing.JButton();
+        radioSortareDupaNumarTel = new javax.swing.JRadioButton();
         paneWest = new javax.swing.JPanel();
         labelReclamaWest = new javax.swing.JLabel();
         paneEast = new javax.swing.JPanel();
@@ -494,6 +528,8 @@ public class AgendaFrame extends javax.swing.JFrame {
 
         butonCautare.setText("Cautare");
 
+        radioSortareDupaNumarTel.setText("Sortare dupa Numar de Telefon");
+
         javax.swing.GroupLayout paneCenterLayout = new javax.swing.GroupLayout(paneCenter);
         paneCenter.setLayout(paneCenterLayout);
         paneCenterLayout.setHorizontalGroup(
@@ -526,14 +562,15 @@ public class AgendaFrame extends javax.swing.JFrame {
                     .addGroup(paneCenterLayout.createSequentialGroup()
                         .addComponent(nrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nrTelTextField)))
+                        .addComponent(nrTelTextField))
+                    .addComponent(radioSortareDupaNumarTel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE))
         );
         paneCenterLayout.setVerticalGroup(
             paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneCenterLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addGroup(paneCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNume))
@@ -569,7 +606,8 @@ public class AgendaFrame extends javax.swing.JFrame {
                 .addComponent(radioSortareDupaPrenume)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(radioSortareDupaCNP)
-                .addGap(17, 17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radioSortareDupaNumarTel))
             .addGroup(paneCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -817,6 +855,7 @@ public class AgendaFrame extends javax.swing.JFrame {
     private javax.swing.JTextField prenumeTextField;
     private javax.swing.JRadioButton radioSortareDupaCNP;
     private javax.swing.JRadioButton radioSortareDupaID;
+    private javax.swing.JRadioButton radioSortareDupaNumarTel;
     private javax.swing.JRadioButton radioSortareDupaNume;
     private javax.swing.JRadioButton radioSortareDupaPrenume;
     private javax.swing.JTable tabelContacte;

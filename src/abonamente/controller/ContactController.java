@@ -4,6 +4,7 @@ import abonamente.Abonat;
 import abonamente.Contact;
 import abonamente.NrTel;
 import abonamente.NrTel;
+import abonamente.comparator.ComparatorCNP;
 import abonamente.gui.AgendaFrame;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -66,4 +67,7 @@ public class ContactController {
         return instance;
     }
 
+    public void sortare(Contact[] c, ComparatorCNP comparatorCNP) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
