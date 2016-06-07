@@ -260,7 +260,59 @@ public class AgendaFrame extends javax.swing.JFrame {
         butonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                edit();
+                int rows = 15;
+                if (tabelContacte.isRowSelected(tabelContacte.getSelectedRow())) {
+
+                    JPanel editPanel = new JPanel();
+                    editPanel.setLayout(new GridLayout(4, 2, 5, 5));
+
+                    //TextFieldurile de mai jos se populeaza cu informatiile din randul selectat din tabel
+                    JTextField tf1 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1), rows);
+                    JTextField tf2 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2), rows);
+                    JTextField tf3 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3), rows);
+                    JTextField tf4 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4), rows);
+
+                    editPanel.add(new JLabel("Nume:"));
+                    editPanel.add(tf1);
+                    editPanel.add(new JLabel("Prenume:"));
+                    editPanel.add(tf2);
+                    editPanel.add(new JLabel("CNP:"));
+                    editPanel.add(tf3);
+                    editPanel.add(new JLabel("Telefon:"));
+                    editPanel.add(tf4);
+
+                    Object[] optiuni = {"Yes", "Cancel"};
+                    int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
+
+                    if (i == JOptionPane.YES_OPTION) {
+                        try {
+                            //Insereaza noile valoari din textFielduri inapoi in tabela, pe randul selectat
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
+                            contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
+                            afisareContacte(contacte);
+                        } catch (ExceptieFormatCnp ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
+                        } catch (ExceptieCnpNumarCaractere ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
+                        } catch (ExceptieFormatNume ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
+                        } catch (ExceptieFormatPrenume ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
+                        } catch (ExceptieFormatTelefon ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
+                        } catch (ExceptieTelefonNumarCaractere ex) {
+                            JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
+                        }
+                    } else {
+                        return;
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
             }
         });
         butonSterge.addActionListener(new ActionListener() {
@@ -288,61 +340,6 @@ public class AgendaFrame extends javax.swing.JFrame {
         
     }//end of addListeners()
 
-    public void edit() {
-        int rows = 15;
-        if (tabelContacte.isRowSelected(tabelContacte.getSelectedRow())) {
-
-            JPanel editPanel = new JPanel();
-            editPanel.setLayout(new GridLayout(4, 2, 5, 5));
-
-            //TextFieldurile de mai jos se populeaza cu informatiile din randul selectat din tabel
-            JTextField tf1 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 1), rows);
-            JTextField tf2 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 2), rows);
-            JTextField tf3 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 3), rows);
-            JTextField tf4 = new JTextField((String) tabelContacte.getModel().getValueAt(tabelContacte.getSelectedRow(), 4), rows);
-            
-            editPanel.add(new JLabel("Nume:"));
-            editPanel.add(tf1);
-            editPanel.add(new JLabel("Prenume:"));
-            editPanel.add(tf2);
-            editPanel.add(new JLabel("CNP:"));
-            editPanel.add(tf3);
-            editPanel.add(new JLabel("Telefon:"));
-            editPanel.add(tf4);
-
-            Object[] optiuni = {"Yes", "Cancel"};
-            int i = JOptionPane.showOptionDialog(null, editPanel, "Verificati informatia:", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, optiuni, optiuni[1]);
-
-            if (i == JOptionPane.YES_OPTION) {
-                try {                    
-                    //Insereaza noile valoari din textFielduri inapoi in tabela, pe randul selectat
-                    contacte.get(tabelContacte.getSelectedRow()).getAbonat().setNume(tf1.getText());
-                    contacte.get(tabelContacte.getSelectedRow()).getAbonat().setPrenume(tf2.getText());
-                    contacte.get(tabelContacte.getSelectedRow()).getAbonat().setCnp(tf3.getText());
-                    contacte.get(tabelContacte.getSelectedRow()).getNrTel().setNr(tf4.getText());
-                    afisareContacte(contacte);
-                } catch (ExceptieFormatCnp ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina numai CIFRE!");
-                } catch (ExceptieCnpNumarCaractere ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'CNP' trebuie sa contina 13 cifre!");
-                } catch (ExceptieFormatNume ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Nume' trebuie sa contina numai LITERE!");
-                } catch (ExceptieFormatPrenume ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Prenume' trebuie sa contina numai LITERE!");
-                } catch (ExceptieFormatTelefon ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina numai CIFRE!");
-                } catch (ExceptieTelefonNumarCaractere ex) {
-                    JOptionPane.showMessageDialog(null, "Campul 'Telefon' trebuie sa contina 10 cifre!");
-                }
-            } else {
-                return;
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Pentru editare este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-    }
     
     public void adaugaContact() throws ExceptieCnpNumarCaractere, ExceptieTelefonNumarCaractere, ExceptieFormatPrenume, ExceptieFormatNume, ExceptieFormatCnp, ExceptieFormatTelefon{
         String nume = numeTextField.getText();
