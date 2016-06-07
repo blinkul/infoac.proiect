@@ -275,8 +275,13 @@ public class AgendaFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (tabelContacte.isRowSelected(tabelContacte.getSelectedRow())){
-                    contacte.remove(tabelContacte.getSelectedRow());
-                    afisareContacte();  
+                    int i = JOptionPane.showConfirmDialog(null, "Doriti sa stergeti contactul?", "Confirmare", JOptionPane.YES_NO_OPTION);
+                    if (i == JOptionPane.YES_OPTION) {
+                        contacte.remove(tabelContacte.getSelectedRow());
+                        afisareContacte();
+                    } else {
+                        return;
+                    }                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Pentru stergerea unui contact este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
                 }
