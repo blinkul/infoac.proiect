@@ -8,7 +8,7 @@ public class ComparatorNumarTelefon implements Comparator<Contact> {
 
     @Override
     public int compare(Contact o1, Contact o2) {
-        return o1.getAbonat().getCnp().compareTo(o2.getAbonat().getCnp());
+        return o1.getNrTel().getNr().compareTo(o2.getNrTel().getNr());
     }
 
     public boolean compareTelefon(String numar1, String numar2) throws ExceptieNumarTelefonDuplicat {

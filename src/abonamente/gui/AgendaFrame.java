@@ -49,6 +49,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import jdk.nashorn.internal.scripts.JO;
 
 /**
@@ -95,8 +96,8 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemInregistrare.setMnemonic(KeyEvent.VK_I);
         menuItemAbout.setMnemonic(KeyEvent.VK_A);
         //*******************************************************************************
-        menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
-        menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
+//        menuItemSave.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
+//        menuItemOpen.setEnabled(true);  //TEMPORAR PANA TERMIN APLICATIA - PENTRU TESTARE
         //*******************************************************************************
 
     }
@@ -237,7 +238,7 @@ public class AgendaFrame extends javax.swing.JFrame {
         menuItemInregistrare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String input = JOptionPane.showInputDialog(new JPanel(), "Introduceti codul de validare!");
+                String input = JOptionPane.showInputDialog(new JPanel(), "Introduceti codul de validare!\n*** HINT: codul este 'cisco' ***");
                 if (input.equals("cisco")) {
                     menuItemSave.setEnabled(true);
                     menuItemOpen.setEnabled(true);
@@ -341,7 +342,9 @@ public class AgendaFrame extends javax.swing.JFrame {
                 if (tabelContacte.isRowSelected(tabelContacte.getSelectedRow())){
                     int i = JOptionPane.showConfirmDialog(null, "Doriti sa stergeti contactul?", "Confirmare", JOptionPane.YES_NO_OPTION);
                     if (i == JOptionPane.YES_OPTION) {
-                        contacte.remove(tabelContacte.getSelectedRow());
+                        int nrRow = tabelContacte.getSelectedRow() ;
+                        int id = Integer.valueOf((String)dtm.getValueAt(nrRow, 0)) -1;
+                        contacte.remove(id);
                         afisareContacte(contacte);
                     } else {
                         return;
@@ -349,6 +352,9 @@ public class AgendaFrame extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(null, "Pentru stergerea unui contact este necesar sa selectati randul dorit!", "Informational", JOptionPane.INFORMATION_MESSAGE);
                 }
+//                for(int i = 1; i<=contacte.size();i++){
+//                    contacte.get(i-1).getAbonat().setId(String.valueOf(i));
+//                }
             }
         });
         //Key Listeneri pentru facilitatea de search din fiecare TextField
@@ -872,7 +878,7 @@ public class AgendaFrame extends javax.swing.JFrame {
             public void run() {
                 AgendaFrame frame = new AgendaFrame();
                 frame.setVisible(true);
-
+                
                 //Folosesc un swing.Timer pentru ca Splash Screenul sa ramana vizibil timp de 2 secunde                
                 frame.panelMare.setVisible(false);
                 javax.swing.Timer timer = new javax.swing.Timer(2000, new ActionListener() {
@@ -882,7 +888,7 @@ public class AgendaFrame extends javax.swing.JFrame {
                         frame.panelMare.setVisible(true);
                     }
                 });
-                timer.setInitialDelay(0); //2000
+                timer.setInitialDelay(2000); //2000
                 timer.setRepeats(false);
                 timer.start();
             }
