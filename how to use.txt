@@ -1,0 +1,45 @@
+Mai jos am sa prezint pe scurt functionalitatea aplicateie:
+
+Dupa deschiderea aplicatie:
+-se incarca automat fisierul TestFile din folderul Save.
+-butoanele Open si Save nu sunt active
+-Reclamele ruleaza pe un Thread separat
+
+Meniul:
+	-Pentru a utiliza mai rapid comenzile din meniu se pot folosi mnemonice (apasand tasta ALT) sau comenzi rapide (ex: CTRL+O pentru Open)
+	-Meniul contine urmatoarele submeniuri: File si Help
+		-File - contine Open, Save si Exit
+			-Open sau Save: Deschid o fereastra pozitionata ca default in folderul 'Save' din folderul curent.
+		-Help - contine Inregistrare si About
+			-Inregistrare - folosit pentru iesirea din modul Shareware a aplicatiei (Activeaza Open si Save si elimina reclamele) - codul de verificare este 'cisco'
+
+Campurile JTextField:
+	-Campurile sunt folosite atat pentru introducerea unui nou contact cat si pentru a face o cautare in tabel
+
+Tabel
+	-contine urmatoarele coloane: ID, Nume, Prenume, CNP, Numar de Telefon
+
+Butoane:
+	-Inserare Contact
+		-Preia informatia din JTextField-uri,
+		-Verifica daca CNP sau Numarul de Telefon introdus exista deja in baza de date (daca exista obiectul nu mai este creat),
+		-Se verifica (in clasaele Abonat / NrTel) daca Nume si Prenume contin doar litere / daca CNP si Numar Telefon contin 	numai cifre
+		-Se verifica (In clasaele Abonat / NrTel) daca CNP are 13 caractere si daca Numarul de Teledon contine 10 caractere
+		-Daca toate criterile de mai sus sunt indeplinite se creaza un obiect 'Contact' care este introdus in Tabel, iar campurile(JTextField-urile) sunt golite
+		-Nume si Prenume sunt formatate: Uppercase pe prima litera si Lowercase pe restul substringului
+		-Contactul este adaugat in Lista si afisat in tabel
+	-Stergere Contact
+		-Sterge contactul selectat
+	-Editeaza rand Selectat
+		-Deschide o fereastra in care fiecare camp poate fi modificat (mai putin ID)
+		-Daca se va apasa YES se vor face toate verificarile mentionate mai sus iar campurile care au 'trecut testul' vor fi updatate.
+	-Goleste Lista
+	-Sort
+		-Sorteaza in functie de criteriul selectat din grupul de Radio Buttons
+
+
+		
+	
+
+
+		
